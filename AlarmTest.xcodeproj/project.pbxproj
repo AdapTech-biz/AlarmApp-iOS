@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7D26D69F75F029BBFBE9846C /* Pods_AlarmTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34A6C990339FE857D0C14B06 /* Pods_AlarmTest.framework */; };
 		C61688B820BF65BE00387647 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61688B720BF65BE00387647 /* Alarm.swift */; };
+		C61688BA20BF731400387647 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61688B920BF731400387647 /* PopUpController.swift */; };
 		C619559120BCDA25004676E9 /* analog-watch-alarm_daniel-simion.wav in Resources */ = {isa = PBXBuildFile; fileRef = C619559020BCDA25004676E9 /* analog-watch-alarm_daniel-simion.wav */; };
 		C619559420BE3019004676E9 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C619559220BE3019004676E9 /* TableViewCell.swift */; };
 		C619559520BE3019004676E9 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C619559320BE3019004676E9 /* TableViewCell.xib */; };
@@ -24,6 +25,7 @@
 		34A6C990339FE857D0C14B06 /* Pods_AlarmTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlarmTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AB8CB9FCBB004A0B1B45D33 /* Pods-AlarmTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlarmTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlarmTest/Pods-AlarmTest.debug.xcconfig"; sourceTree = "<group>"; };
 		C61688B720BF65BE00387647 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		C61688B920BF731400387647 /* PopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpController.swift; sourceTree = "<group>"; };
 		C619559020BCDA25004676E9 /* analog-watch-alarm_daniel-simion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "analog-watch-alarm_daniel-simion.wav"; sourceTree = "<group>"; };
 		C619559220BE3019004676E9 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		C619559320BE3019004676E9 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 			children = (
 				C67B9BE820BCBD2600E7F0D0 /* AppDelegate.swift */,
 				C67B9BEA20BCBD2600E7F0D0 /* ViewController.swift */,
+				C61688B920BF731400387647 /* PopUpController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -228,11 +231,15 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-AlarmTest/Pods-AlarmTest-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/HGPlaceholders/HGPlaceholders.framework",
+				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HGPlaceholders.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -249,6 +256,7 @@
 				C619559420BE3019004676E9 /* TableViewCell.swift in Sources */,
 				C67B9BEB20BCBD2600E7F0D0 /* ViewController.swift in Sources */,
 				C67B9BE920BCBD2600E7F0D0 /* AppDelegate.swift in Sources */,
+				C61688BA20BF731400387647 /* PopUpController.swift in Sources */,
 				C61688B820BF65BE00387647 /* Alarm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

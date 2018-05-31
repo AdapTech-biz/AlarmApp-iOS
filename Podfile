@@ -7,4 +7,5 @@ target 'AlarmTest' do
 
   # Pods for AlarmTest
 	pod 'HGPlaceholders'
+	pod 'PopupDialog', '~> 0.7'
 end

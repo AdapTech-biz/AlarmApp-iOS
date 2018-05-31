@@ -10,6 +10,7 @@ import UIKit
 import UserNotifications
 import AVFoundation
 import HGPlaceholders
+import PopupDialog
 
 class ViewController: UIViewController{
     
@@ -77,24 +78,50 @@ class ViewController: UIViewController{
 
         }
         
+    }
+    
+    //MARK: Button Press Action
+       ///////////////////////////////////////////////////////////////////
+    
+    @IBAction func addButtonPressed(_ sender: Any) {
         
-
+        // Prepare the popup assets
+        let title = "Type of Alarm"
+        let message = "You have options: "
+        let image = UIImage(named: "popUpImage")
         
+        // Create the dialog
+        let popup = PopupDialog(title: title, message: message, image: image)
+        popup.transitionStyle = .fadeIn
+        popup.shake()
         
-
+        // Create buttons
+        let buttonOne = CancelButton(title: "CANCEL") {
+            print("You canceled the car dialog.")
+        }
         
+        // This button will not the dismiss the dialog
+        let buttonTwo = DefaultButton(title: "Smart Alarm") {
+            print("Smart alarm picked")
+        }
+        buttonTwo.buttonHeight = 100
         
-
+        let buttonThree = DestructiveButton(title: "Old-Fashion", height: 60) {
+            print("Still old fashion")
+        }
         
-
+        // Add buttons to dialog
+        // Alternatively, you can use popup.addButton(buttonOne)
+        // to add a single button
+        popup.addButtons([buttonTwo, buttonThree, buttonOne])
         
-        
-        
-        
-
-        
+        // Present dialog
+        self.present(popup, animated: true, completion: nil)
         
     }
+    
+    
+       ///////////////////////////////////////////////////////////////////
  
     
    
