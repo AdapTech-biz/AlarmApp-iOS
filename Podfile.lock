@@ -1,0 +1,42 @@
+PODS:
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
+    - ChameleonFramework/Default
+  - DynamicBlurView (2.0.2)
+  - HGPlaceholders (0.3.0)
+  - PopupDialog (0.7.1):
+    - DynamicBlurView (~> 2.0)
+  - SCLAlertView (0.8)
+
+DEPENDENCIES:
+  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
+  - HGPlaceholders
+  - PopupDialog (~> 0.7)
+  - SCLAlertView
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - DynamicBlurView
+    - HGPlaceholders
+    - PopupDialog
+    - SCLAlertView
+
+EXTERNAL SOURCES:
+  ChameleonFramework:
+    :git: https://github.com/ViccAlexander/Chameleon.git
+
+CHECKOUT OPTIONS:
+  ChameleonFramework:
+    :commit: 6dd284bde21ea2e7f9fd89bc36f40df16e16369d
+    :git: https://github.com/ViccAlexander/Chameleon.git
+
+SPEC CHECKSUMS:
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
+  HGPlaceholders: 2df01c51b04a30acd0b8c9c7161c7cdde4541109
+  PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
+  SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
+
+PODFILE CHECKSUM: b867a32fc2e93a1ede06a7db6cd68a7e5e945461
+
+COCOAPODS: 1.5.2
