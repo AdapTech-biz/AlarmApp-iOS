@@ -8,4 +8,6 @@ target 'AlarmTest' do
   # Pods for AlarmTest
 	pod 'HGPlaceholders'
 	pod 'PopupDialog', '~> 0.7'
+    pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+    pod 'SCLAlertView'
 end

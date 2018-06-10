@@ -9,12 +9,16 @@
 /* Begin PBXBuildFile section */
 		7D26D69F75F029BBFBE9846C /* Pods_AlarmTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34A6C990339FE857D0C14B06 /* Pods_AlarmTest.framework */; };
 		C61688B820BF65BE00387647 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61688B720BF65BE00387647 /* Alarm.swift */; };
-		C61688BA20BF731400387647 /* PopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61688B920BF731400387647 /* PopUpController.swift */; };
+		C61688BD20BF85D100387647 /* DayOfWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61688BB20BF85D100387647 /* DayOfWeekCell.swift */; };
+		C61688BE20BF85D100387647 /* DayOfWeekCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C61688BC20BF85D100387647 /* DayOfWeekCell.xib */; };
+		C61688C020BF871F00387647 /* OldFashionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61688BF20BF871F00387647 /* OldFashionViewController.swift */; };
+		C61688C220BF87DE00387647 /* DaysofWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61688C120BF87DE00387647 /* DaysofWeek.swift */; };
+		C61688C420CAC81500387647 /* UserAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61688C320CAC81500387647 /* UserAlarm.swift */; };
 		C619559120BCDA25004676E9 /* analog-watch-alarm_daniel-simion.wav in Resources */ = {isa = PBXBuildFile; fileRef = C619559020BCDA25004676E9 /* analog-watch-alarm_daniel-simion.wav */; };
-		C619559420BE3019004676E9 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C619559220BE3019004676E9 /* TableViewCell.swift */; };
-		C619559520BE3019004676E9 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C619559320BE3019004676E9 /* TableViewCell.xib */; };
+		C619559420BE3019004676E9 /* AlarmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C619559220BE3019004676E9 /* AlarmCell.swift */; };
+		C619559520BE3019004676E9 /* AlarmCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C619559320BE3019004676E9 /* AlarmCell.xib */; };
 		C67B9BE920BCBD2600E7F0D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B9BE820BCBD2600E7F0D0 /* AppDelegate.swift */; };
-		C67B9BEB20BCBD2600E7F0D0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B9BEA20BCBD2600E7F0D0 /* ViewController.swift */; };
+		C67B9BEB20BCBD2600E7F0D0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B9BEA20BCBD2600E7F0D0 /* HomeViewController.swift */; };
 		C67B9BEE20BCBD2600E7F0D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C67B9BEC20BCBD2600E7F0D0 /* Main.storyboard */; };
 		C67B9BF020BCBD2900E7F0D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C67B9BEF20BCBD2900E7F0D0 /* Assets.xcassets */; };
 		C67B9BF320BCBD2900E7F0D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C67B9BF120BCBD2900E7F0D0 /* LaunchScreen.storyboard */; };
@@ -25,13 +29,17 @@
 		34A6C990339FE857D0C14B06 /* Pods_AlarmTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlarmTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AB8CB9FCBB004A0B1B45D33 /* Pods-AlarmTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlarmTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlarmTest/Pods-AlarmTest.debug.xcconfig"; sourceTree = "<group>"; };
 		C61688B720BF65BE00387647 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
-		C61688B920BF731400387647 /* PopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpController.swift; sourceTree = "<group>"; };
+		C61688BB20BF85D100387647 /* DayOfWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekCell.swift; sourceTree = "<group>"; };
+		C61688BC20BF85D100387647 /* DayOfWeekCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayOfWeekCell.xib; sourceTree = "<group>"; };
+		C61688BF20BF871F00387647 /* OldFashionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldFashionViewController.swift; sourceTree = "<group>"; };
+		C61688C120BF87DE00387647 /* DaysofWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysofWeek.swift; sourceTree = "<group>"; };
+		C61688C320CAC81500387647 /* UserAlarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAlarm.swift; sourceTree = "<group>"; };
 		C619559020BCDA25004676E9 /* analog-watch-alarm_daniel-simion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "analog-watch-alarm_daniel-simion.wav"; sourceTree = "<group>"; };
-		C619559220BE3019004676E9 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		C619559320BE3019004676E9 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		C619559220BE3019004676E9 /* AlarmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCell.swift; sourceTree = "<group>"; };
+		C619559320BE3019004676E9 /* AlarmCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmCell.xib; sourceTree = "<group>"; };
 		C67B9BE520BCBD2600E7F0D0 /* AlarmTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlarmTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C67B9BE820BCBD2600E7F0D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C67B9BEA20BCBD2600E7F0D0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C67B9BEA20BCBD2600E7F0D0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C67B9BED20BCBD2600E7F0D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C67B9BEF20BCBD2900E7F0D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C67B9BF220BCBD2900E7F0D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -62,8 +70,8 @@
 			isa = PBXGroup;
 			children = (
 				C67B9BE820BCBD2600E7F0D0 /* AppDelegate.swift */,
-				C67B9BEA20BCBD2600E7F0D0 /* ViewController.swift */,
-				C61688B920BF731400387647 /* PopUpController.swift */,
+				C67B9BEA20BCBD2600E7F0D0 /* HomeViewController.swift */,
+				C61688BF20BF871F00387647 /* OldFashionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -73,7 +81,8 @@
 			children = (
 				C67B9BEC20BCBD2600E7F0D0 /* Main.storyboard */,
 				C67B9BF120BCBD2900E7F0D0 /* LaunchScreen.storyboard */,
-				C619559320BE3019004676E9 /* TableViewCell.xib */,
+				C619559320BE3019004676E9 /* AlarmCell.xib */,
+				C61688BC20BF85D100387647 /* DayOfWeekCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -81,8 +90,10 @@
 		C61688B620BF657E00387647 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C619559220BE3019004676E9 /* TableViewCell.swift */,
+				C619559220BE3019004676E9 /* AlarmCell.swift */,
+				C61688BB20BF85D100387647 /* DayOfWeekCell.swift */,
 				C61688B720BF65BE00387647 /* Alarm.swift */,
+				C61688C320CAC81500387647 /* UserAlarm.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -116,12 +127,13 @@
 		C67B9BE720BCBD2600E7F0D0 /* AlarmTest */ = {
 			isa = PBXGroup;
 			children = (
+				C67B9BEF20BCBD2900E7F0D0 /* Assets.xcassets */,
+				C67B9BF420BCBD2900E7F0D0 /* Info.plist */,
 				C61688B620BF657E00387647 /* Model */,
 				C61688B520BF657800387647 /* View */,
 				C61688B420BF656F00387647 /* Controller */,
 				C619558F20BCDA13004676E9 /* Sound Files */,
-				C67B9BEF20BCBD2900E7F0D0 /* Assets.xcassets */,
-				C67B9BF420BCBD2900E7F0D0 /* Info.plist */,
+				C61688C120BF87DE00387647 /* DaysofWeek.swift */,
 			);
 			path = AlarmTest;
 			sourceTree = "<group>";
@@ -196,8 +208,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C619559120BCDA25004676E9 /* analog-watch-alarm_daniel-simion.wav in Resources */,
-				C619559520BE3019004676E9 /* TableViewCell.xib in Resources */,
+				C619559520BE3019004676E9 /* AlarmCell.xib in Resources */,
 				C67B9BF320BCBD2900E7F0D0 /* LaunchScreen.storyboard in Resources */,
+				C61688BE20BF85D100387647 /* DayOfWeekCell.xib in Resources */,
 				C67B9BF020BCBD2900E7F0D0 /* Assets.xcassets in Resources */,
 				C67B9BEE20BCBD2600E7F0D0 /* Main.storyboard in Resources */,
 			);
@@ -231,15 +244,19 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-AlarmTest/Pods-AlarmTest-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/HGPlaceholders/HGPlaceholders.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
+				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HGPlaceholders.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -253,10 +270,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C619559420BE3019004676E9 /* TableViewCell.swift in Sources */,
-				C67B9BEB20BCBD2600E7F0D0 /* ViewController.swift in Sources */,
+				C61688C020BF871F00387647 /* OldFashionViewController.swift in Sources */,
+				C619559420BE3019004676E9 /* AlarmCell.swift in Sources */,
+				C61688BD20BF85D100387647 /* DayOfWeekCell.swift in Sources */,
+				C67B9BEB20BCBD2600E7F0D0 /* HomeViewController.swift in Sources */,
 				C67B9BE920BCBD2600E7F0D0 /* AppDelegate.swift in Sources */,
-				C61688BA20BF731400387647 /* PopUpController.swift in Sources */,
+				C61688C220BF87DE00387647 /* DaysofWeek.swift in Sources */,
+				C61688C420CAC81500387647 /* UserAlarm.swift in Sources */,
 				C61688B820BF65BE00387647 /* Alarm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

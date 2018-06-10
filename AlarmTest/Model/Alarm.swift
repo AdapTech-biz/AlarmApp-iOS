@@ -18,15 +18,21 @@ class Alarm{
     var request : UNNotificationRequest?
     var notificationActions = [UNNotificationAction]()
     var delegate : UNUserNotificationCenterDelegate?
+    var alarmTitle : String
+    var weeklySchedule : Set<DaysofWeek>?
+    var alarmHour : Int = 0
+    var alarmMin : Int = 0
     
     
-    init() {
+    init(title: String ) {
         center = UNUserNotificationCenter.current()
         content = UNMutableNotificationContent()
         
+        alarmTitle = title
+        
     }
 
-    
+
     
     //MARK: Request Access Notification Center
     //////////////////////////////////////////////////////////////////

@@ -11,78 +11,41 @@ import UserNotifications
 import AVFoundation
 import HGPlaceholders
 import PopupDialog
+import ChameleonFramework
 
-class ViewController: UIViewController{
+class HomeViewController: UIViewController{
+    
+    //MARK: UIOutlet Controllers
+    /////////////////////////////////////////////////////////////////
     
     @IBOutlet weak var tableView: TableView!
+    /////////////////////////////////////////////////////////////////
+
     
+    //MARK: Class Variables
+    /////////////////////////////////////////////////////////////////
+
     var alarm : Alarm?
     var noteSoundEffect : AVAudioPlayer?
+    var createdAlarms = [Alarm]()
+    /////////////////////////////////////////////////////////////////
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        let nib = UINib(nibName: "TableViewCell", bundle: nil)
-            tableView.register(nib, forCellReuseIdentifier: "customCell")
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.rowHeight = 70
+        let nib = UINib(nibName: "AlarmCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "alarmCell")
 
-        
-        alarm = Alarm()
-
-        //assign Nofication Center delegate to self
-        if let alarm = alarm{
-            //get Notification Center object
-            let center = alarm.center
-            center.removeAllPendingNotificationRequests()
-            
-            center.delegate = self
-            
-            //get user access to user Notifcation center
-            alarm.getNotificationAccess(to: center)
-            
-            let firstAction = alarm.makeAlertAction(withTitle: "Snooze", withIdentifier: "SNOOZE")
-                alarm.notificationActions.append(firstAction)
-            let secondAction = alarm.makeAlertAction(withTitle: "Decline", withIdentifier: "DECLINE")
-                alarm.notificationActions.append(secondAction)
-            
-            let alarmCategory = alarm.createAlermCategory(withTitle: "SleeperAlarm", actions: alarm.notificationActions)
-    
-    
-            center.setNotificationCategories([alarmCategory])
-            
-//          call Alarm class to get content var
-            let content = alarm.content
-            content.title = "Time to get up!"
-            content.body = "The alarm you set is on!"
-            //        content.sound = UNNotificationSound.
-            content.sound = UNNotificationSound(named: "analog-watch-alarm_daniel-simion.wav")
-            content.categoryIdentifier = "ALARM"
-            
-            var date = DateComponents()
-            date.hour = 20
-            date.minute = 00
-            
-            var trigger = alarm.trigger
-            trigger = UNCalendarNotificationTrigger.init(dateMatching: date, repeats: false)
-    
-            let request = UNNotificationRequest.init(identifier: "Test", content: content, trigger: trigger)
-    
-            center.add(request) { (error) in
-                if let error = error {
-                    print(error)
-                }else{
-                    print("request Successful...")
-    
-                }
-            }
-
-        }
-        
     }
     
     //MARK: Button Press Action
-       ///////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
     
+
     @IBAction func addButtonPressed(_ sender: Any) {
         
         // Prepare the popup assets
@@ -92,7 +55,7 @@ class ViewController: UIViewController{
         
         // Create the dialog
         let popup = PopupDialog(title: title, message: message, image: image)
-        popup.transitionStyle = .fadeIn
+        popup.transitionStyle = .bounceUp
         popup.shake()
         
         // Create buttons
@@ -104,10 +67,10 @@ class ViewController: UIViewController{
         let buttonTwo = DefaultButton(title: "Smart Alarm") {
             print("Smart alarm picked")
         }
-        buttonTwo.buttonHeight = 100
         
-        let buttonThree = DestructiveButton(title: "Old-Fashion", height: 60) {
-            print("Still old fashion")
+        
+        let buttonThree = DefaultButton(title: "Old-Fashion") {
+            self.performSegue(withIdentifier: "goToOldFashion", sender: self)
         }
         
         // Add buttons to dialog
@@ -121,30 +84,30 @@ class ViewController: UIViewController{
     }
     
     
-       ///////////////////////////////////////////////////////////////////
- 
-    
-   
+    ///////////////////////////////////////////////////////////////////
     
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToOldFashion"{
+            let destinationVC = segue.destination as! OldFashionViewController
+            destinationVC.homeViewController = self
+            destinationVC.delegate = self
+        }
     }
-
-
+    
+    
     
 }
 
 
-extension ViewController: UNUserNotificationCenterDelegate, UITableViewDelegate, UITableViewDataSource, PlaceholderDelegate{
+extension HomeViewController: UNUserNotificationCenterDelegate, UITableViewDelegate, UITableViewDataSource, PlaceholderDelegate, AlarmCreatedDelegate{
     
     func view(_ view: Any, actionButtonTappedFor placeholder: Placeholder) {
         tableView.showDefault()
     }
     
-
-    //TODO: UserNotificationCenter Delegate Methods
+    
+    //MARK: UserNotificationCenter Delegate Methods
     ///////////////////////////////////////////////////////////////////
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -154,23 +117,23 @@ extension ViewController: UNUserNotificationCenterDelegate, UITableViewDelegate,
         completionHandler([.alert,.sound])
         
         
-
+        
         let url = Bundle.main.url(forResource: "analog-watch-alarm_daniel-simion", withExtension:"wav")!
-
+        
         do {
             noteSoundEffect = try AVAudioPlayer(contentsOf: url)
             noteSoundEffect?.play()
             noteSoundEffect?.numberOfLoops = -1
-
+            
         } catch {
             print(error.localizedDescription)
         }
-
-
+        
+        
     }
-
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-
+        
         switch response.actionIdentifier {
         case "Snooze":
             print("Snooze button selected...")
@@ -179,30 +142,64 @@ extension ViewController: UNUserNotificationCenterDelegate, UITableViewDelegate,
             print("Stop action seleceted...")
             noteSoundEffect?.stop()
         }
-
+        
         completionHandler()
     }
     
     //////////////////////////////////////////////////////////////////
     
-   
     
-    //TODO: UITableView Delegate Methods
+    
+    //MARK: UITableView Delegate Methods
     ///////////////////////////////////////////////////////////////////
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "alarmCell", for: indexPath) as! AlarmCell
+        cell.accessoryType = .disclosureIndicator
+        let currentAlarm = createdAlarms[indexPath.row]
+        cell.alarmTitle.text = currentAlarm.alarmTitle
+        cell.hourLabel.text = "\(currentAlarm.alarmHour)"
+        cell.minuteLabel.text = String(format: "%02d", currentAlarm.alarmMin)
+        
+        if let weeklySchedule = currentAlarm.weeklySchedule{
+            for day in weeklySchedule{
+                switch day{
+                case .Sunday: cell.sundayLabel.textColor = UIColor.flatMint
+                case .Monday: cell.mondayLabel.textColor = UIColor.flatMint
+                case .Tuesday: cell.tuesdayLabel.textColor = UIColor.flatMint
+                case .Wednesday: cell.wednesdayLabel.textColor = UIColor.flatMint
+                case .Thursday: cell.thursdayLabel.textColor = UIColor.flatMint
+                case .Friday: cell.fridayLabel.textColor = UIColor.flatMint
+                case .Saturday: cell.saturdayLabel.textColor = UIColor.flatMint
+                }
+            }
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return createdAlarms.count
     }
     
     
     
     //////////////////////////////////////////////////////////////////
+    
+    //MARK: AlarmCreatedDelegate Method
+    /////////////////////////////////////////////////////////////////
+    
+    
+    func newAlarmCreated(createdAlarm: Alarm) {
+        
+        createdAlarms.append(createdAlarm)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    /////////////////////////////////////////////////////////////////
+    
+    
     
 }
 
