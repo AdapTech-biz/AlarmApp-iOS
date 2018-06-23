@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7D26D69F75F029BBFBE9846C /* Pods_AlarmTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34A6C990339FE857D0C14B06 /* Pods_AlarmTest.framework */; };
+		6348A028C1EECF14F973D5D4 /* Pods_A_M_JumpStart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2649965C75F98FBCFED30EC0 /* Pods_A_M_JumpStart.framework */; };
 		C61688B820BF65BE00387647 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61688B720BF65BE00387647 /* Alarm.swift */; };
 		C61688BD20BF85D100387647 /* DayOfWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61688BB20BF85D100387647 /* DayOfWeekCell.swift */; };
 		C61688BE20BF85D100387647 /* DayOfWeekCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C61688BC20BF85D100387647 /* DayOfWeekCell.xib */; };
@@ -17,6 +17,16 @@
 		C619559120BCDA25004676E9 /* analog-watch-alarm_daniel-simion.wav in Resources */ = {isa = PBXBuildFile; fileRef = C619559020BCDA25004676E9 /* analog-watch-alarm_daniel-simion.wav */; };
 		C619559420BE3019004676E9 /* AlarmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C619559220BE3019004676E9 /* AlarmCell.swift */; };
 		C619559520BE3019004676E9 /* AlarmCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C619559320BE3019004676E9 /* AlarmCell.xib */; };
+		C6389E1B20D5991A0068AFB7 /* SmartAlarmIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6389E1A20D5991A0068AFB7 /* SmartAlarmIntro.swift */; };
+		C6389E1D20D5A3240068AFB7 /* US-States.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6389E1C20D5A3240068AFB7 /* US-States.swift */; };
+		C6389E4220D72C0F0068AFB7 /* DayOfWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6389E4120D72C0F0068AFB7 /* DayOfWeek.swift */; };
+		C64FADEF20DC4E000057C8DE /* PostAlarmActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FADEE20DC4E000057C8DE /* PostAlarmActivityViewController.swift */; };
+		C64FADF220DC4E550057C8DE /* PostAlarmActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FADF020DC4E550057C8DE /* PostAlarmActivityCell.swift */; };
+		C64FADF320DC4E550057C8DE /* PostAlarmActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64FADF120DC4E550057C8DE /* PostAlarmActivityCell.xib */; };
+		C64FADF520DC4F5B0057C8DE /* ActivityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FADF420DC4F5B0057C8DE /* ActivityList.swift */; };
+		C64FADFA20DECE2A0057C8DE /* ActivityDurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FADF820DECE2A0057C8DE /* ActivityDurationCell.swift */; };
+		C64FADFB20DECE2A0057C8DE /* ActivityDurationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64FADF920DECE2A0057C8DE /* ActivityDurationCell.xib */; };
+		C64FADFD20DECFD40057C8DE /* ActivityDurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FADFC20DECFD40057C8DE /* ActivityDurationViewController.swift */; };
 		C67B9BE920BCBD2600E7F0D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B9BE820BCBD2600E7F0D0 /* AppDelegate.swift */; };
 		C67B9BEB20BCBD2600E7F0D0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B9BEA20BCBD2600E7F0D0 /* HomeViewController.swift */; };
 		C67B9BEE20BCBD2600E7F0D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C67B9BEC20BCBD2600E7F0D0 /* Main.storyboard */; };
@@ -25,9 +35,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0021C369D845C4F865F522DB /* Pods-AlarmTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlarmTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlarmTest/Pods-AlarmTest.release.xcconfig"; sourceTree = "<group>"; };
+		1E2D3FBB7EF989AE3C794B52 /* Pods-A.M JumpStart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-A.M JumpStart.debug.xcconfig"; path = "Pods/Target Support Files/Pods-A.M JumpStart/Pods-A.M JumpStart.debug.xcconfig"; sourceTree = "<group>"; };
+		2649965C75F98FBCFED30EC0 /* Pods_A_M_JumpStart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_A_M_JumpStart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34A6C990339FE857D0C14B06 /* Pods_AlarmTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlarmTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4AB8CB9FCBB004A0B1B45D33 /* Pods-AlarmTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlarmTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlarmTest/Pods-AlarmTest.debug.xcconfig"; sourceTree = "<group>"; };
+		5CC14772191D85B670519D89 /* Pods-A.M JumpStart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-A.M JumpStart.release.xcconfig"; path = "Pods/Target Support Files/Pods-A.M JumpStart/Pods-A.M JumpStart.release.xcconfig"; sourceTree = "<group>"; };
 		C61688B720BF65BE00387647 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		C61688BB20BF85D100387647 /* DayOfWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekCell.swift; sourceTree = "<group>"; };
 		C61688BC20BF85D100387647 /* DayOfWeekCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayOfWeekCell.xib; sourceTree = "<group>"; };
@@ -37,7 +48,17 @@
 		C619559020BCDA25004676E9 /* analog-watch-alarm_daniel-simion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "analog-watch-alarm_daniel-simion.wav"; sourceTree = "<group>"; };
 		C619559220BE3019004676E9 /* AlarmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCell.swift; sourceTree = "<group>"; };
 		C619559320BE3019004676E9 /* AlarmCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmCell.xib; sourceTree = "<group>"; };
-		C67B9BE520BCBD2600E7F0D0 /* AlarmTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlarmTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6389E1A20D5991A0068AFB7 /* SmartAlarmIntro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartAlarmIntro.swift; sourceTree = "<group>"; };
+		C6389E1C20D5A3240068AFB7 /* US-States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "US-States.swift"; sourceTree = "<group>"; };
+		C6389E4120D72C0F0068AFB7 /* DayOfWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeek.swift; sourceTree = "<group>"; };
+		C64FADEE20DC4E000057C8DE /* PostAlarmActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAlarmActivityViewController.swift; sourceTree = "<group>"; };
+		C64FADF020DC4E550057C8DE /* PostAlarmActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAlarmActivityCell.swift; sourceTree = "<group>"; };
+		C64FADF120DC4E550057C8DE /* PostAlarmActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostAlarmActivityCell.xib; sourceTree = "<group>"; };
+		C64FADF420DC4F5B0057C8DE /* ActivityList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityList.swift; sourceTree = "<group>"; };
+		C64FADF820DECE2A0057C8DE /* ActivityDurationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDurationCell.swift; sourceTree = "<group>"; };
+		C64FADF920DECE2A0057C8DE /* ActivityDurationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityDurationCell.xib; sourceTree = "<group>"; };
+		C64FADFC20DECFD40057C8DE /* ActivityDurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDurationViewController.swift; sourceTree = "<group>"; };
+		C67B9BE520BCBD2600E7F0D0 /* A.M JumpStart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "A.M JumpStart.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C67B9BE820BCBD2600E7F0D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C67B9BEA20BCBD2600E7F0D0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C67B9BED20BCBD2600E7F0D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -51,7 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D26D69F75F029BBFBE9846C /* Pods_AlarmTest.framework in Frameworks */,
+				6348A028C1EECF14F973D5D4 /* Pods_A_M_JumpStart.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				34A6C990339FE857D0C14B06 /* Pods_AlarmTest.framework */,
+				2649965C75F98FBCFED30EC0 /* Pods_A_M_JumpStart.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -72,6 +94,11 @@
 				C67B9BE820BCBD2600E7F0D0 /* AppDelegate.swift */,
 				C67B9BEA20BCBD2600E7F0D0 /* HomeViewController.swift */,
 				C61688BF20BF871F00387647 /* OldFashionViewController.swift */,
+				C6389E1A20D5991A0068AFB7 /* SmartAlarmIntro.swift */,
+				C64FADEE20DC4E000057C8DE /* PostAlarmActivityViewController.swift */,
+				C64FADFC20DECFD40057C8DE /* ActivityDurationViewController.swift */,
+				C64FADF020DC4E550057C8DE /* PostAlarmActivityCell.swift */,
+				C64FADF820DECE2A0057C8DE /* ActivityDurationCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -82,7 +109,9 @@
 				C67B9BEC20BCBD2600E7F0D0 /* Main.storyboard */,
 				C67B9BF120BCBD2900E7F0D0 /* LaunchScreen.storyboard */,
 				C619559320BE3019004676E9 /* AlarmCell.xib */,
+				C64FADF120DC4E550057C8DE /* PostAlarmActivityCell.xib */,
 				C61688BC20BF85D100387647 /* DayOfWeekCell.xib */,
+				C64FADF920DECE2A0057C8DE /* ActivityDurationCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -94,6 +123,7 @@
 				C61688BB20BF85D100387647 /* DayOfWeekCell.swift */,
 				C61688B720BF65BE00387647 /* Alarm.swift */,
 				C61688C320CAC81500387647 /* UserAlarm.swift */,
+				C6389E4120D72C0F0068AFB7 /* DayOfWeek.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -106,10 +136,21 @@
 			path = "Sound Files";
 			sourceTree = "<group>";
 		};
+		C6389E1E20D5AC250068AFB7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C67B9BF420BCBD2900E7F0D0 /* Info.plist */,
+				C6389E1C20D5A3240068AFB7 /* US-States.swift */,
+				C61688C120BF87DE00387647 /* DaysofWeek.swift */,
+				C64FADF420DC4F5B0057C8DE /* ActivityList.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		C67B9BDC20BCBD2600E7F0D0 = {
 			isa = PBXGroup;
 			children = (
-				C67B9BE720BCBD2600E7F0D0 /* AlarmTest */,
+				C67B9BE720BCBD2600E7F0D0 /* A.M JumpStart */,
 				C67B9BE620BCBD2600E7F0D0 /* Products */,
 				E7B09FE0378E197367D8CEA1 /* Pods */,
 				90AC57459CE55D560490B756 /* Frameworks */,
@@ -119,30 +160,29 @@
 		C67B9BE620BCBD2600E7F0D0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C67B9BE520BCBD2600E7F0D0 /* AlarmTest.app */,
+				C67B9BE520BCBD2600E7F0D0 /* A.M JumpStart.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C67B9BE720BCBD2600E7F0D0 /* AlarmTest */ = {
+		C67B9BE720BCBD2600E7F0D0 /* A.M JumpStart */ = {
 			isa = PBXGroup;
 			children = (
+				C6389E1E20D5AC250068AFB7 /* Supporting Files */,
 				C67B9BEF20BCBD2900E7F0D0 /* Assets.xcassets */,
-				C67B9BF420BCBD2900E7F0D0 /* Info.plist */,
 				C61688B620BF657E00387647 /* Model */,
 				C61688B520BF657800387647 /* View */,
 				C61688B420BF656F00387647 /* Controller */,
 				C619558F20BCDA13004676E9 /* Sound Files */,
-				C61688C120BF87DE00387647 /* DaysofWeek.swift */,
 			);
-			path = AlarmTest;
+			path = "A.M JumpStart";
 			sourceTree = "<group>";
 		};
 		E7B09FE0378E197367D8CEA1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4AB8CB9FCBB004A0B1B45D33 /* Pods-AlarmTest.debug.xcconfig */,
-				0021C369D845C4F865F522DB /* Pods-AlarmTest.release.xcconfig */,
+				1E2D3FBB7EF989AE3C794B52 /* Pods-A.M JumpStart.debug.xcconfig */,
+				5CC14772191D85B670519D89 /* Pods-A.M JumpStart.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -150,9 +190,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C67B9BE420BCBD2600E7F0D0 /* AlarmTest */ = {
+		C67B9BE420BCBD2600E7F0D0 /* A.M JumpStart */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C67B9BF720BCBD2900E7F0D0 /* Build configuration list for PBXNativeTarget "AlarmTest" */;
+			buildConfigurationList = C67B9BF720BCBD2900E7F0D0 /* Build configuration list for PBXNativeTarget "A.M JumpStart" */;
 			buildPhases = (
 				639E18DDCB5D20018488DC34 /* [CP] Check Pods Manifest.lock */,
 				C67B9BE120BCBD2600E7F0D0 /* Sources */,
@@ -164,9 +204,9 @@
 			);
 			dependencies = (
 			);
-			name = AlarmTest;
+			name = "A.M JumpStart";
 			productName = AlarmTest;
-			productReference = C67B9BE520BCBD2600E7F0D0 /* AlarmTest.app */;
+			productReference = C67B9BE520BCBD2600E7F0D0 /* A.M JumpStart.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -181,10 +221,15 @@
 				TargetAttributes = {
 					C67B9BE420BCBD2600E7F0D0 = {
 						CreatedOnToolsVersion = 9.3.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
-			buildConfigurationList = C67B9BE020BCBD2600E7F0D0 /* Build configuration list for PBXProject "AlarmTest" */;
+			buildConfigurationList = C67B9BE020BCBD2600E7F0D0 /* Build configuration list for PBXProject "A.M JumpStart" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -197,7 +242,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C67B9BE420BCBD2600E7F0D0 /* AlarmTest */,
+				C67B9BE420BCBD2600E7F0D0 /* A.M JumpStart */,
 			);
 		};
 /* End PBXProject section */
@@ -211,6 +256,8 @@
 				C619559520BE3019004676E9 /* AlarmCell.xib in Resources */,
 				C67B9BF320BCBD2900E7F0D0 /* LaunchScreen.storyboard in Resources */,
 				C61688BE20BF85D100387647 /* DayOfWeekCell.xib in Resources */,
+				C64FADFB20DECE2A0057C8DE /* ActivityDurationCell.xib in Resources */,
+				C64FADF320DC4E550057C8DE /* PostAlarmActivityCell.xib in Resources */,
 				C67B9BF020BCBD2900E7F0D0 /* Assets.xcassets in Resources */,
 				C67B9BEE20BCBD2600E7F0D0 /* Main.storyboard in Resources */,
 			);
@@ -230,7 +277,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AlarmTest-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-A.M JumpStart-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -243,24 +290,30 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-AlarmTest/Pods-AlarmTest-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-A.M JumpStart/Pods-A.M JumpStart-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
+				"${BUILT_PRODUCTS_DIR}/GMStepper/GMStepper.framework",
 				"${BUILT_PRODUCTS_DIR}/HGPlaceholders/HGPlaceholders.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GMStepper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HGPlaceholders.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlarmTest/Pods-AlarmTest-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-A.M JumpStart/Pods-A.M JumpStart-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -271,12 +324,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				C61688C020BF871F00387647 /* OldFashionViewController.swift in Sources */,
+				C64FADFD20DECFD40057C8DE /* ActivityDurationViewController.swift in Sources */,
+				C64FADF220DC4E550057C8DE /* PostAlarmActivityCell.swift in Sources */,
+				C6389E1D20D5A3240068AFB7 /* US-States.swift in Sources */,
 				C619559420BE3019004676E9 /* AlarmCell.swift in Sources */,
 				C61688BD20BF85D100387647 /* DayOfWeekCell.swift in Sources */,
 				C67B9BEB20BCBD2600E7F0D0 /* HomeViewController.swift in Sources */,
 				C67B9BE920BCBD2600E7F0D0 /* AppDelegate.swift in Sources */,
 				C61688C220BF87DE00387647 /* DaysofWeek.swift in Sources */,
+				C64FADFA20DECE2A0057C8DE /* ActivityDurationCell.swift in Sources */,
 				C61688C420CAC81500387647 /* UserAlarm.swift in Sources */,
+				C64FADF520DC4F5B0057C8DE /* ActivityList.swift in Sources */,
+				C64FADEF20DC4E000057C8DE /* PostAlarmActivityViewController.swift in Sources */,
+				C6389E4220D72C0F0068AFB7 /* DayOfWeek.swift in Sources */,
+				C6389E1B20D5991A0068AFB7 /* SmartAlarmIntro.swift in Sources */,
 				C61688B820BF65BE00387647 /* Alarm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,17 +480,17 @@
 		};
 		C67B9BF820BCBD2900E7F0D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4AB8CB9FCBB004A0B1B45D33 /* Pods-AlarmTest.debug.xcconfig */;
+			baseConfigurationReference = 1E2D3FBB7EF989AE3C794B52 /* Pods-A.M JumpStart.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WJ89D3M2FZ;
-				INFOPLIST_FILE = AlarmTest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/A.M JumpStart/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.xyd93.AlarmTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xyd93.AMJumpStart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -438,17 +499,17 @@
 		};
 		C67B9BF920BCBD2900E7F0D0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0021C369D845C4F865F522DB /* Pods-AlarmTest.release.xcconfig */;
+			baseConfigurationReference = 5CC14772191D85B670519D89 /* Pods-A.M JumpStart.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WJ89D3M2FZ;
-				INFOPLIST_FILE = AlarmTest/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/A.M JumpStart/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.xyd93.AlarmTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xyd93.AMJumpStart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -458,7 +519,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C67B9BE020BCBD2600E7F0D0 /* Build configuration list for PBXProject "AlarmTest" */ = {
+		C67B9BE020BCBD2600E7F0D0 /* Build configuration list for PBXProject "A.M JumpStart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C67B9BF520BCBD2900E7F0D0 /* Debug */,
@@ -467,7 +528,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C67B9BF720BCBD2900E7F0D0 /* Build configuration list for PBXNativeTarget "AlarmTest" */ = {
+		C67B9BF720BCBD2900E7F0D0 /* Build configuration list for PBXNativeTarget "A.M JumpStart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C67B9BF820BCBD2900E7F0D0 /* Debug */,

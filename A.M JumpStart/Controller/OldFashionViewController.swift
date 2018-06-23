@@ -44,6 +44,16 @@ class OldFashionViewController: UIViewController {
     var selectedDays = Set<DaysofWeek>()
     var colorArray = ColorSchemeOf(ColorScheme.complementary, color: FlatBlue(), isFlatScheme: true)
     var homeViewController : HomeViewController?
+    let days:[DayofWeek] = [
+        DayofWeek(day: DaysofWeek.Sunday),
+        DayofWeek(day: DaysofWeek.Monday),
+        DayofWeek(day: DaysofWeek.Tuesday),
+        DayofWeek(day: DaysofWeek.Wednesday),
+        DayofWeek(day: DaysofWeek.Thursday),
+        DayofWeek(day: DaysofWeek.Friday),
+        DayofWeek(day: DaysofWeek.Saturday)
+    ]
+    var alarm : Alarm?
     /////////////////////////////////////////////////////////////////
 
     
@@ -60,6 +70,13 @@ class OldFashionViewController: UIViewController {
         view.backgroundColor = GradientColor(.topToBottom, frame: view.frame, colors: colors)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        if let alarm = alarm{
+            self.delegate?.newAlarmCreated(createdAlarm: alarm)
+
+        }
+    }
+    
     //MARK: IBAction Button Press
     //////////////////////////////////////////////////////////////
     
@@ -73,27 +90,50 @@ class OldFashionViewController: UIViewController {
         let alert = SCLAlertView(appearance: appearance)
         let text = alert.addTextField("Label for Alarm...")
         alert.addButton("Create") {
+            
+            self.alarm = Alarm(title: text.text!)
+            guard let alarm = self.alarm else {fatalError()}
+            
             var calendarUnitFlags = Set<Calendar.Component>()
             calendarUnitFlags.insert(.weekday)
             calendarUnitFlags.insert(.hour)
             calendarUnitFlags.insert(.minute)
             
-            let dateComponents = NSCalendar.current.dateComponents(calendarUnitFlags, from: self.timePicker.date)
+            var dateComponents = NSCalendar.current.dateComponents(calendarUnitFlags, from: self.timePicker.date)
+            let calendar = Calendar.current
+            let currentDate = Date()
+            
+            let year = calendar.component(.year, from: currentDate)
             
             print(self.selectedDays)
-            if self.reoccurringSwitch.isOn
-            {
-                self.createAlarm(title: text.text!, for: dateComponents, weekdays: self.selectedDays)
+           
+            
+//            var dates = [Date]()
+            if !self.selectedDays.isEmpty{
                 
+            alarm.weeklySchedule = self.selectedDays
+                
+            for day in self.selectedDays{
+                let createdDate = self.createDate(weekday: day.dateComponentValue, hour: dateComponents.hour!, minute: dateComponents.minute!, year: year)
+                print(createdDate)
+                self.createAlarm(title: "\(text.text!) \(day.description)", for: createdDate, using: alarm)
+                }
             }else{
-                self.createAlarm(title: text.text!, for: dateComponents, weekdays: nil)
+                let weekday = calendar.component(.weekday, from: currentDate)
+                let createdDate = self.createDate(weekday: weekday, hour: dateComponents.hour!, minute: dateComponents.minute!, year: year)
+                print(createdDate)
+                self.createAlarm(title: "\(text.text!) Today", for: createdDate, using: alarm)
             }
             
         }
+        
         alert.showEdit("Name new alarm", subTitle: "Make it yours", circleIconImage: alertViewIcon)
+        
         
   
     }
+    
+    
     
     @IBAction func backButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -103,8 +143,7 @@ class OldFashionViewController: UIViewController {
     @IBAction func repeatableSwitchClicked(_ sender: UISwitch) {
         
         self.tableView.isHidden = !sender.isOn
-        
-        
+  
     }
     
     /////////////////////////////////////////////////////////////////
@@ -112,9 +151,26 @@ class OldFashionViewController: UIViewController {
     //MARK: Functionality to create alarms
     /////////////////////////////////////////////////////////////////
     
-    func createAlarm(title: String = "Alarm", for date:  DateComponents, weekdays: Set<DaysofWeek>?) {
+    //Create Date from picker selected value.
+    func createDate(weekday: Int, hour: Int, minute: Int, year: Int)->Date{
         
-        let alarm = Alarm(title: title)
+        var components = DateComponents()
+        components.hour = hour
+        components.minute = minute
+        components.year = year
+        components.weekday = weekday // sunday = 1 ... saturday = 7
+        components.weekOfYear = Calendar.current.component(.weekOfYear, from: Date())
+        components.month = Calendar.current.component(.month, from: Date())
+//        components.weekdayOrdinal = 10
+        components.timeZone = .current
+        
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar.date(from: components)!
+    }
+    
+    func createAlarm(title: String = "Alarm", for date:  Date, using alarm: Alarm) {
+        
+        let repeats = reoccurringSwitch.isOn
         
         
         //assign Nofication Center delegate to self
@@ -126,65 +182,27 @@ class OldFashionViewController: UIViewController {
         
         //get user access to user Notifcation center
         alarm.getNotificationAccess(to: center)
-        
-        let firstAction = alarm.makeAlertAction(withTitle: "Snooze", withIdentifier: "SNOOZE")
-        alarm.notificationActions.append(firstAction)
-        let secondAction = alarm.makeAlertAction(withTitle: "Decline", withIdentifier: "DECLINE")
-        alarm.notificationActions.append(secondAction)
-        
-        let alarmCategory = alarm.createAlermCategory(withTitle: "SleeperAlarm", actions: alarm.notificationActions)
-        
-        
-        center.setNotificationCategories([alarmCategory])
+
         
         let content = alarm.content
-        content.title = "Time to get up!"
-        content.body = "The alarm you set is on!"
-        content.sound = UNNotificationSound(named: "analog-watch-alarm_daniel-simion.wav")
-        content.categoryIdentifier = "SleeperAlarm"
+
         
+        let triggerDate = Calendar.current.dateComponents([.weekday,.hour,.minute,.second,], from: date)
+            alarm.alarmHour = triggerDate.hour!
+            alarm.alarmMin = triggerDate.minute!
         
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: repeats)
         
-        alarm.alarmHour = date.hour!
-        alarm.alarmMin = date.minute!
-        
-        if let weekdays = weekdays{
-            alarm.weeklySchedule = weekdays
-            for day in weekdays{
-                var newDate = date
-                newDate.day = day.dateComponentValue
-                let trigger = UNCalendarNotificationTrigger.init(dateMatching: newDate, repeats: false)
-                
-                let request = UNNotificationRequest.init(identifier: "Alarm \(day)", content: content, trigger: trigger)
-                
-                center.add(request) { (error) in
-                    if let error = error {
-                        print(error)
-                    }else{
-                        print("Alarm created for \(newDate.day!)")
-                       
-                        
-                        
-                    }
-                }
-            }
-        }else{
-            let trigger = UNCalendarNotificationTrigger.init(dateMatching: date, repeats: false)
-            
-            let request = UNNotificationRequest.init(identifier: "Alarm 1", content: content, trigger: trigger)
-            
-            center.add(request) { (error) in
-                if let error = error {
-                    print(error)
-                }else{
-                    print("Alarm created for today!")
-                    
-                    
-                }
+        let request = UNNotificationRequest(identifier: title, content: content, trigger: trigger)
+        alarm.center.add(request) { (error) in
+            if let error = error {
+                print(error)
+            }else{
+              alarm.requests.append(request)
             }
         }
+       
         self.dismiss(animated: true, completion: nil)
-        self.delegate?.newAlarmCreated(createdAlarm: alarm)
         
     }
     /////////////////////////////////////////////////////////////////
@@ -200,28 +218,10 @@ extension OldFashionViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "dayCell", for: indexPath) as! DayOfWeekCell
+        let thisDay = days[indexPath.row]
+        cell.dayTitle.text = thisDay.day
         
-        switch indexPath.row {
-        case 0:
-            cell.dayOfWeek = DaysofWeek.Monday
-        case 1:
-            cell.dayOfWeek = DaysofWeek.Tuesday
-        case 2:
-            cell.dayOfWeek = DaysofWeek.Wednesday
-        case 3:
-            cell.dayOfWeek = DaysofWeek.Thursday
-        case 4:
-            cell.dayOfWeek = DaysofWeek.Friday
-        case 5:
-            cell.dayOfWeek = DaysofWeek.Saturday
-        default:
-            cell.dayOfWeek = DaysofWeek.Sunday
-            
-        }
-        
-        cell.dayTitle.text = cell.dayOfWeek?.description
-        
-        if cell.cellSelected{
+        if thisDay.selected{
             cell.accessoryType = .checkmark
         }else{
             cell.accessoryType = .none
@@ -232,27 +232,22 @@ extension OldFashionViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 7
+        return days.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! DayOfWeekCell
-        
-        cell.cellSelected = true
-        selectedDays.insert((cell.dayOfWeek)!)
+        let selectedDay = days[indexPath.row]
+        selectedDay.selected = !selectedDay.selected
+       
+        if (selectedDay.selected){
+            selectedDays.insert(selectedDay.dayEnum)
+        }else{
+           selectedDays.remove(selectedDay.dayEnum)
+        }
         tableView.reloadData()
     }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! DayOfWeekCell
-        
-        cell.cellSelected = false
-        selectedDays.remove((cell.dayOfWeek)!)
-        tableView.reloadData()
-    }
+
     
     /////////////////////////////////////////////////////////////////
-    
-    
-    
+
 }

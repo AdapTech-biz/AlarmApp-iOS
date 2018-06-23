@@ -15,7 +15,7 @@ class Alarm{
     let center : UNUserNotificationCenter
     let content : UNMutableNotificationContent
     var trigger : UNCalendarNotificationTrigger?
-    var request : UNNotificationRequest?
+    var requests = [UNNotificationRequest]()
     var notificationActions = [UNNotificationAction]()
     var delegate : UNUserNotificationCenterDelegate?
     var alarmTitle : String
@@ -29,6 +29,26 @@ class Alarm{
         content = UNMutableNotificationContent()
         
         alarmTitle = title
+        self.constructContent()
+   
+    }
+    
+    func constructContent(){
+        
+        let firstAction = makeAlertAction(withTitle: "Snooze", withIdentifier: "SNOOZE")
+        notificationActions.append(firstAction)
+        let secondAction = makeAlertAction(withTitle: "Decline", withIdentifier: "DECLINE")
+        notificationActions.append(secondAction)
+        
+        let alarmCategory = createAlermCategory(withTitle: alarmTitle, actions: notificationActions)
+        
+        
+        center.setNotificationCategories([alarmCategory])
+        
+        content.title = "Time to get up!"
+        content.body = "The alarm you set is on!"
+        content.sound = UNNotificationSound(named: "analog-watch-alarm_daniel-simion.wav")
+        content.categoryIdentifier = "SleeperAlarm"
         
     }
 

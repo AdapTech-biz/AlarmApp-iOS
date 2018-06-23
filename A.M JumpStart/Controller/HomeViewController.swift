@@ -42,6 +42,14 @@ class HomeViewController: UIViewController{
 
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToOldFashion"{
+            let destinationVC = segue.destination as! OldFashionViewController
+            destinationVC.homeViewController = self
+            destinationVC.delegate = self
+        }
+    }
+    
     //MARK: Button Press Action
     ///////////////////////////////////////////////////////////////////
     
@@ -65,7 +73,7 @@ class HomeViewController: UIViewController{
         
         // This button will not the dismiss the dialog
         let buttonTwo = DefaultButton(title: "Smart Alarm") {
-            print("Smart alarm picked")
+            self.performSegue(withIdentifier: "goToSmartAlarm", sender: self)
         }
         
         
@@ -85,18 +93,7 @@ class HomeViewController: UIViewController{
     
     
     ///////////////////////////////////////////////////////////////////
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToOldFashion"{
-            let destinationVC = segue.destination as! OldFashionViewController
-            destinationVC.homeViewController = self
-            destinationVC.delegate = self
-        }
-    }
-    
-    
-    
+
 }
 
 
@@ -181,9 +178,6 @@ extension HomeViewController: UNUserNotificationCenterDelegate, UITableViewDeleg
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return createdAlarms.count
     }
-    
-    
-    
     //////////////////////////////////////////////////////////////////
     
     //MARK: AlarmCreatedDelegate Method
@@ -193,6 +187,7 @@ extension HomeViewController: UNUserNotificationCenterDelegate, UITableViewDeleg
     func newAlarmCreated(createdAlarm: Alarm) {
         
         createdAlarms.append(createdAlarm)
+        //save with relm or core data
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

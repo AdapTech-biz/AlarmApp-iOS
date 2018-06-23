@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:AlarmTest.xcodeproj">
+      location = "group:/Users/xyd93/Dropbox/Documents/Programming/Swift/AlarmTest/A.M JumpStart.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
