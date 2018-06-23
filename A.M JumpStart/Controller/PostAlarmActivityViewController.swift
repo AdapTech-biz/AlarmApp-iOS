@@ -55,14 +55,13 @@ class PostAlarmActivityViewController: UIViewController {
 
     func removeActivity(at indextPath: IndexPath){
         
-        selectedActivites.append(ActivityList.activity[indextPath.row])
+        selectedActivites.append(activityList[indextPath.row])
         activityList.remove(at: indextPath.row)
         var paths = Array<IndexPath>()
         paths.append(indextPath)
         collectionView.performBatchUpdates({
             
-            self.collectionView.deleteItems(at: paths)
-//            numActivities -= paths.count
+        self.collectionView.deleteItems(at: paths)
             
         }, completion: nil)
         

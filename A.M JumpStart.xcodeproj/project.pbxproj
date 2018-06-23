@@ -106,12 +106,9 @@
 		C61688B520BF657800387647 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C64FADFE20DED6440057C8DE /* Cells */,
 				C67B9BEC20BCBD2600E7F0D0 /* Main.storyboard */,
 				C67B9BF120BCBD2900E7F0D0 /* LaunchScreen.storyboard */,
-				C619559320BE3019004676E9 /* AlarmCell.xib */,
-				C64FADF120DC4E550057C8DE /* PostAlarmActivityCell.xib */,
-				C61688BC20BF85D100387647 /* DayOfWeekCell.xib */,
-				C64FADF920DECE2A0057C8DE /* ActivityDurationCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -145,6 +142,17 @@
 				C64FADF420DC4F5B0057C8DE /* ActivityList.swift */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C64FADFE20DED6440057C8DE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C619559320BE3019004676E9 /* AlarmCell.xib */,
+				C64FADF120DC4E550057C8DE /* PostAlarmActivityCell.xib */,
+				C61688BC20BF85D100387647 /* DayOfWeekCell.xib */,
+				C64FADF920DECE2A0057C8DE /* ActivityDurationCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		C67B9BDC20BCBD2600E7F0D0 = {
