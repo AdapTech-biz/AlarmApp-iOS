@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6348A028C1EECF14F973D5D4 /* Pods_A_M_JumpStart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2649965C75F98FBCFED30EC0 /* Pods_A_M_JumpStart.framework */; };
-		C61688B820BF65BE00387647 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61688B720BF65BE00387647 /* Alarm.swift */; };
+		C60B195720EC25D800FE5E67 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C60B195620EC25D800FE5E67 /* Main.storyboard */; };
+		C61688B820BF65BE00387647 /* SystemAlarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61688B720BF65BE00387647 /* SystemAlarm.swift */; };
 		C61688BD20BF85D100387647 /* DayOfWeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61688BB20BF85D100387647 /* DayOfWeekCell.swift */; };
 		C61688BE20BF85D100387647 /* DayOfWeekCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C61688BC20BF85D100387647 /* DayOfWeekCell.xib */; };
 		C61688C020BF871F00387647 /* OldFashionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61688BF20BF871F00387647 /* OldFashionViewController.swift */; };
@@ -25,13 +26,13 @@
 		C64FADF320DC4E550057C8DE /* PostAlarmActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64FADF120DC4E550057C8DE /* PostAlarmActivityCell.xib */; };
 		C64FADF520DC4F5B0057C8DE /* ActivityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FADF420DC4F5B0057C8DE /* ActivityList.swift */; };
 		C64FADFA20DECE2A0057C8DE /* ActivityDurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FADF820DECE2A0057C8DE /* ActivityDurationCell.swift */; };
-		C64FADFB20DECE2A0057C8DE /* ActivityDurationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C64FADF920DECE2A0057C8DE /* ActivityDurationCell.xib */; };
 		C64FADFD20DECFD40057C8DE /* ActivityDurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FADFC20DECFD40057C8DE /* ActivityDurationViewController.swift */; };
 		C67B9BE920BCBD2600E7F0D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B9BE820BCBD2600E7F0D0 /* AppDelegate.swift */; };
 		C67B9BEB20BCBD2600E7F0D0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B9BEA20BCBD2600E7F0D0 /* HomeViewController.swift */; };
-		C67B9BEE20BCBD2600E7F0D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C67B9BEC20BCBD2600E7F0D0 /* Main.storyboard */; };
 		C67B9BF020BCBD2900E7F0D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C67B9BEF20BCBD2900E7F0D0 /* Assets.xcassets */; };
 		C67B9BF320BCBD2900E7F0D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C67B9BF120BCBD2900E7F0D0 /* LaunchScreen.storyboard */; };
+		C6CD3F3520E4694800AC61ED /* Foldable.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6CD3F3320E4694800AC61ED /* Foldable.xib */; };
+		C6CD3F3720EAFE7200AC61ED /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD3F3620EAFE7200AC61ED /* CustomView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +40,8 @@
 		2649965C75F98FBCFED30EC0 /* Pods_A_M_JumpStart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_A_M_JumpStart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34A6C990339FE857D0C14B06 /* Pods_AlarmTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlarmTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC14772191D85B670519D89 /* Pods-A.M JumpStart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-A.M JumpStart.release.xcconfig"; path = "Pods/Target Support Files/Pods-A.M JumpStart/Pods-A.M JumpStart.release.xcconfig"; sourceTree = "<group>"; };
-		C61688B720BF65BE00387647 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		C60B195620EC25D800FE5E67 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C61688B720BF65BE00387647 /* SystemAlarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAlarm.swift; sourceTree = "<group>"; };
 		C61688BB20BF85D100387647 /* DayOfWeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOfWeekCell.swift; sourceTree = "<group>"; };
 		C61688BC20BF85D100387647 /* DayOfWeekCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayOfWeekCell.xib; sourceTree = "<group>"; };
 		C61688BF20BF871F00387647 /* OldFashionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldFashionViewController.swift; sourceTree = "<group>"; };
@@ -56,15 +58,15 @@
 		C64FADF120DC4E550057C8DE /* PostAlarmActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostAlarmActivityCell.xib; sourceTree = "<group>"; };
 		C64FADF420DC4F5B0057C8DE /* ActivityList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityList.swift; sourceTree = "<group>"; };
 		C64FADF820DECE2A0057C8DE /* ActivityDurationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDurationCell.swift; sourceTree = "<group>"; };
-		C64FADF920DECE2A0057C8DE /* ActivityDurationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityDurationCell.xib; sourceTree = "<group>"; };
 		C64FADFC20DECFD40057C8DE /* ActivityDurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDurationViewController.swift; sourceTree = "<group>"; };
 		C67B9BE520BCBD2600E7F0D0 /* A.M JumpStart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "A.M JumpStart.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C67B9BE820BCBD2600E7F0D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C67B9BEA20BCBD2600E7F0D0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		C67B9BED20BCBD2600E7F0D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C67B9BEF20BCBD2900E7F0D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C67B9BF220BCBD2900E7F0D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C67B9BF420BCBD2900E7F0D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C6CD3F3320E4694800AC61ED /* Foldable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Foldable.xib; sourceTree = "<group>"; };
+		C6CD3F3620EAFE7200AC61ED /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,8 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				C64FADFE20DED6440057C8DE /* Cells */,
-				C67B9BEC20BCBD2600E7F0D0 /* Main.storyboard */,
 				C67B9BF120BCBD2900E7F0D0 /* LaunchScreen.storyboard */,
+				C60B195620EC25D800FE5E67 /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -116,10 +118,10 @@
 		C61688B620BF657E00387647 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C61688B720BF65BE00387647 /* SystemAlarm.swift */,
+				C61688C320CAC81500387647 /* UserAlarm.swift */,
 				C619559220BE3019004676E9 /* AlarmCell.swift */,
 				C61688BB20BF85D100387647 /* DayOfWeekCell.swift */,
-				C61688B720BF65BE00387647 /* Alarm.swift */,
-				C61688C320CAC81500387647 /* UserAlarm.swift */,
 				C6389E4120D72C0F0068AFB7 /* DayOfWeek.swift */,
 			);
 			path = Model;
@@ -140,6 +142,7 @@
 				C6389E1C20D5A3240068AFB7 /* US-States.swift */,
 				C61688C120BF87DE00387647 /* DaysofWeek.swift */,
 				C64FADF420DC4F5B0057C8DE /* ActivityList.swift */,
+				C6CD3F3620EAFE7200AC61ED /* CustomView.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -150,7 +153,7 @@
 				C619559320BE3019004676E9 /* AlarmCell.xib */,
 				C64FADF120DC4E550057C8DE /* PostAlarmActivityCell.xib */,
 				C61688BC20BF85D100387647 /* DayOfWeekCell.xib */,
-				C64FADF920DECE2A0057C8DE /* ActivityDurationCell.xib */,
+				C6CD3F3320E4694800AC61ED /* Foldable.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -263,11 +266,11 @@
 				C619559120BCDA25004676E9 /* analog-watch-alarm_daniel-simion.wav in Resources */,
 				C619559520BE3019004676E9 /* AlarmCell.xib in Resources */,
 				C67B9BF320BCBD2900E7F0D0 /* LaunchScreen.storyboard in Resources */,
+				C60B195720EC25D800FE5E67 /* Main.storyboard in Resources */,
 				C61688BE20BF85D100387647 /* DayOfWeekCell.xib in Resources */,
-				C64FADFB20DECE2A0057C8DE /* ActivityDurationCell.xib in Resources */,
+				C6CD3F3520E4694800AC61ED /* Foldable.xib in Resources */,
 				C64FADF320DC4E550057C8DE /* PostAlarmActivityCell.xib in Resources */,
 				C67B9BF020BCBD2900E7F0D0 /* Assets.xcassets in Resources */,
-				C67B9BEE20BCBD2600E7F0D0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +305,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
+				"${BUILT_PRODUCTS_DIR}/FoldingCell/FoldingCell.framework",
 				"${BUILT_PRODUCTS_DIR}/GMStepper/GMStepper.framework",
 				"${BUILT_PRODUCTS_DIR}/HGPlaceholders/HGPlaceholders.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
@@ -313,6 +317,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FoldingCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GMStepper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HGPlaceholders.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
@@ -340,27 +345,20 @@
 				C67B9BEB20BCBD2600E7F0D0 /* HomeViewController.swift in Sources */,
 				C67B9BE920BCBD2600E7F0D0 /* AppDelegate.swift in Sources */,
 				C61688C220BF87DE00387647 /* DaysofWeek.swift in Sources */,
+				C6CD3F3720EAFE7200AC61ED /* CustomView.swift in Sources */,
 				C64FADFA20DECE2A0057C8DE /* ActivityDurationCell.swift in Sources */,
 				C61688C420CAC81500387647 /* UserAlarm.swift in Sources */,
 				C64FADF520DC4F5B0057C8DE /* ActivityList.swift in Sources */,
 				C64FADEF20DC4E000057C8DE /* PostAlarmActivityViewController.swift in Sources */,
 				C6389E4220D72C0F0068AFB7 /* DayOfWeek.swift in Sources */,
 				C6389E1B20D5991A0068AFB7 /* SmartAlarmIntro.swift in Sources */,
-				C61688B820BF65BE00387647 /* Alarm.swift in Sources */,
+				C61688B820BF65BE00387647 /* SystemAlarm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C67B9BEC20BCBD2600E7F0D0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C67B9BED20BCBD2600E7F0D0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C67B9BF120BCBD2900E7F0D0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -13,7 +13,7 @@ import ChameleonFramework
 import SCLAlertView
 
 protocol AlarmCreatedDelegate {
-    func newAlarmCreated(createdAlarm: Alarm)
+    func newAlarmCreated(createdAlarm: SystemAlarm)
 }
 
 
@@ -53,7 +53,7 @@ class OldFashionViewController: UIViewController {
         DayofWeek(day: DaysofWeek.Friday),
         DayofWeek(day: DaysofWeek.Saturday)
     ]
-    var alarm : Alarm?
+    var alarm : SystemAlarm?
     /////////////////////////////////////////////////////////////////
 
     
@@ -91,7 +91,7 @@ class OldFashionViewController: UIViewController {
         let text = alert.addTextField("Label for Alarm...")
         alert.addButton("Create") {
             
-            self.alarm = Alarm(title: text.text!)
+            self.alarm = SystemAlarm(title: text.text!)
             guard let alarm = self.alarm else {fatalError()}
             
             var calendarUnitFlags = Set<Calendar.Component>()
@@ -107,8 +107,6 @@ class OldFashionViewController: UIViewController {
             
             print(self.selectedDays)
            
-            
-//            var dates = [Date]()
             if !self.selectedDays.isEmpty{
                 
             alarm.weeklySchedule = self.selectedDays
@@ -161,14 +159,13 @@ class OldFashionViewController: UIViewController {
         components.weekday = weekday // sunday = 1 ... saturday = 7
         components.weekOfYear = Calendar.current.component(.weekOfYear, from: Date())
         components.month = Calendar.current.component(.month, from: Date())
-//        components.weekdayOrdinal = 10
         components.timeZone = .current
         
         let calendar = Calendar(identifier: .gregorian)
         return calendar.date(from: components)!
     }
     
-    func createAlarm(title: String = "Alarm", for date:  Date, using alarm: Alarm) {
+    func createAlarm(title: String = "Alarm", for date:  Date, using alarm: SystemAlarm) {
         
         let repeats = reoccurringSwitch.isOn
         

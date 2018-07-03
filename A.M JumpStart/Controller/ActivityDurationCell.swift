@@ -7,20 +7,49 @@
 //
 
 import UIKit
+import GMStepper
+import FoldingCell
 
-class ActivityDurationCell: UITableViewCell {
 
-    @IBOutlet weak var activity: UILabel!
+protocol ActivityDurationDelegate {
+    func timeTotalUpdated(time: Double)
+}
+
+class ActivityDurationCell: FoldingCell {
+    var delegate : ActivityDurationDelegate?
     
+
+    @IBOutlet weak var durationTime: GMStepper!
+    @IBOutlet var activityLabels: [UILabel]!
+    @IBOutlet weak var minutesLabel: UILabel!{
+        
+        didSet{
+            delegate?.timeTotalUpdated(time: durationTime.value)
+        }
+    }
+    
+    @IBOutlet weak var foldedBackground: RotatedView!
+    
+    @IBOutlet weak var unfoldedBackground: RotatedView!
+    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func animationDuration(_ itemIndex: NSInteger, type: FoldingCell.AnimationType) -> TimeInterval {
+        // durations count equal it itemCount
+        let durations = [0.33, 0.26, 0.26] // timing animation for each view
+        return durations[itemIndex]
     }
     
 }

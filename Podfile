@@ -13,4 +13,5 @@ target 'A.M JumpStart' do
     pod 'GMStepper'
     pod 'SwiftyJSON'
     pod 'Alamofire'
+    pod 'FoldingCell'
 end

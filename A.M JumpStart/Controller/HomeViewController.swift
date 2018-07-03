@@ -25,9 +25,9 @@ class HomeViewController: UIViewController{
     //MARK: Class Variables
     /////////////////////////////////////////////////////////////////
 
-    var alarm : Alarm?
+    var alarm : SystemAlarm?
     var noteSoundEffect : AVAudioPlayer?
-    var createdAlarms = [Alarm]()
+    var createdAlarms = [SystemAlarm]()
     /////////////////////////////////////////////////////////////////
 
     
@@ -184,7 +184,7 @@ extension HomeViewController: UNUserNotificationCenterDelegate, UITableViewDeleg
     /////////////////////////////////////////////////////////////////
     
     
-    func newAlarmCreated(createdAlarm: Alarm) {
+    func newAlarmCreated(createdAlarm: SystemAlarm) {
         
         createdAlarms.append(createdAlarm)
         //save with relm or core data

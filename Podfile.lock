@@ -4,6 +4,7 @@ PODS:
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - DynamicBlurView (2.0.2)
+  - FoldingCell (3.1.1)
   - GMStepper (2.1)
   - HGPlaceholders (0.3.0)
   - PopupDialog (0.7.1):
@@ -14,6 +15,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
+  - FoldingCell
   - GMStepper
   - HGPlaceholders
   - PopupDialog (~> 0.7)
@@ -24,6 +26,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - DynamicBlurView
+    - FoldingCell
     - GMStepper
     - HGPlaceholders
     - PopupDialog
@@ -43,12 +46,13 @@ SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
+  FoldingCell: 238c33ae8d9cd655090c9c4c5ff32596cfd18c6e
   GMStepper: 8994824040d57d952134e409b7724d05a1a41c18
   HGPlaceholders: 2df01c51b04a30acd0b8c9c7161c7cdde4541109
   PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 5e93ec460297c926613d604135c30c6dd28d7c2b
+PODFILE CHECKSUM: a562e823216ff5d7ad53ff777cc0f6a4ab5833e8
 
 COCOAPODS: 1.5.2

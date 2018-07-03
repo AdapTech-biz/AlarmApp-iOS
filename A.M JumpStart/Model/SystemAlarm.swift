@@ -10,7 +10,7 @@ import Foundation
 import UserNotifications
 import AVFoundation
 
-class Alarm{
+class SystemAlarm{
     
     let center : UNUserNotificationCenter
     let content : UNMutableNotificationContent
