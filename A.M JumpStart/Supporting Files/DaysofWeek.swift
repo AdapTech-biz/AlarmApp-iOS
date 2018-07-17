@@ -35,17 +35,16 @@ enum DaysofWeek: CustomStringConvertible{
         }
     }
     
-    
+    case Sunday
     case Monday
     case Tuesday
     case Wednesday
     case Thursday
     case Friday
     case Saturday
-    case Sunday
     
-    static let allDays = [DaysofWeek.Monday, DaysofWeek.Tuesday, DaysofWeek.Wednesday, DaysofWeek.Thursday,
-                          DaysofWeek.Friday, DaysofWeek.Saturday, DaysofWeek.Sunday]
+    static let allDays = [DaysofWeek.Sunday, DaysofWeek.Monday, DaysofWeek.Tuesday, DaysofWeek.Wednesday, DaysofWeek.Thursday,
+                          DaysofWeek.Friday, DaysofWeek.Saturday]
 }
 
 

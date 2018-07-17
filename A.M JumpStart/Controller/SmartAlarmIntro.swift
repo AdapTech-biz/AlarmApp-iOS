@@ -14,21 +14,35 @@ import Alamofire
 
 class SmartAlarmIntro: UIViewController {
     
-  
-    let locationManager = CLLocationManager()
+    var locationManager: CLLocationManager?{
+        didSet{
+            print("manger set!")
+            setupLocationManager()
+        }
+    }
+    
+    private var smartAlarm: SmartAlarm = SmartAlarm(title: "Alarm")
+    
      let states = UIPickerView()
     
+    @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var stateTextField: UITextField!
     
-   
+    @IBOutlet weak var formStackView: UIStackView!
+
+    
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         states.dataSource = self
         states.delegate = self
+        
+      
+        
+        
         //ToolBar
         let toolbar = UIToolbar();
         toolbar.sizeToFit()
@@ -44,10 +58,10 @@ class SmartAlarmIntro: UIViewController {
         
         // Do any additional setup after loading the view.
         //TODO:Set up the location manager here.
-        getLocation()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
+
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
 //        let API_KEY = "&key=AIzaSyD5xKj3wd0xJ29AI4KI6a_wv8bbmsrqNOQ"
 //        let url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Dover+DE&destinations=509+NW+Backwoods+Rd+Moyock".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
@@ -76,34 +90,7 @@ class SmartAlarmIntro: UIViewController {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
     }
     
-    func getLocation() {
-        print("Getting location")
-        // 1
-        let status  = CLLocationManager.authorizationStatus()
-        
-        // 2
-        if status == .notDetermined {
-            locationManager.requestWhenInUseAuthorization()
-            return
-        }
-        
-        // 3
-        if status == .denied || status == .restricted {
-            let alert = UIAlertController(title: "Location Services Disabled", message: "Please enable Location Services in Settings", preferredStyle: .alert)
-            
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(okAction)
-            
-            present(alert, animated: true, completion: nil)
-            return
-        }
-        
-        // 4
-        locationManager.delegate = self //define who the delegate is -- current class
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters  //defines the accuracy for the GPS location
-//        locationManager.requestWhenInUseAuthorization() //request user approve to use GPS location -- make updates to plist file as well
-        locationManager.startUpdatingLocation() //starts searching for GPS location
-    }
+
     
     func displayPopUp() {
         // Prepare the popup assets
@@ -153,36 +140,71 @@ class SmartAlarmIntro: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
-    @objc func keyboardWillShow(sender: NSNotification) {
-        let userInfo: [String : AnyObject] = sender.userInfo! as! [String : AnyObject]
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        smartAlarm.alarmTitle = titleTextField.text!
+       smartAlarm.destination = ["address": addressTextField.text!,
+                              "city": cityTextField.text!,
+                              "state": stateTextField.text!]
         
-        let keyboardSize: CGSize = userInfo[UIKeyboardFrameBeginUserInfoKey]!.cgRectValue.size
-        let offset: CGSize = userInfo[UIKeyboardFrameEndUserInfoKey]!.cgRectValue.size
-        
-        if keyboardSize.height == offset.height {
-            if self.view.frame.origin.y == 0 {
-                UIView.animate(withDuration: 0.1, animations: { () -> Void in
-                    self.view.frame.origin.y -= keyboardSize.height
-                })
-            }
-        } else {
-            UIView.animate(withDuration: 0.1, animations: { () -> Void in
-                self.view.frame.origin.y += keyboardSize.height - offset.height
-            })
+        switch segue.identifier {
+        case "goToManualDepart":
+            let destinationVC = segue.destination as! PointofOrginViewController
+            destinationVC.smartAlarm = self.smartAlarm
+            
+        default:
+            let destinationVC = segue.destination as! PostAlarmActivityViewController
+            destinationVC.smartAlarm = self.smartAlarm
         }
+        
     }
     
-   @objc func keyboardWillHide(sender: NSNotification) {
-        let userInfo: [String : AnyObject] = sender.userInfo! as! [String : AnyObject]
-        let keyboardSize: CGSize = userInfo[UIKeyboardFrameBeginUserInfoKey]!.cgRectValue.size
-        self.view.frame.origin.y += keyboardSize.height
+    @IBAction func continuePressed(_ sender: Any) {
+        
+        // Prepare the popup assets
+        let title = "Travel From"
+        let message = "Set point of orgin: "
+        let image = UIImage(named: "popUpImage")
+        
+        // Create the dialog
+        let popup = PopupDialog(title: title, message: message, image: image)
+        popup.transitionStyle = .bounceUp
+        popup.shake()
+        
+        // Create buttons
+        let buttonOne = CancelButton(title: "Back") {
+            print("Closing pop up")
+        }
+        
+        let buttonTwo = DefaultButton(title: "Use Current Location") {
+            print("using current location...")
+            self.locationManager = CLLocationManager()
+            
+            
+        }
+        
+        // This button will not the dismiss the dialog
+        let buttonThree = DefaultButton(title: "Enter Depart Location") {
+            self.performSegue(withIdentifier: "goToManualDepart", sender: self)
+            print("Manual entry...")
+        }
+       
+
+        // Add buttons to dialog
+        // Alternatively, you can use popup.addButton(buttonOne)
+        // to add a single button
+        popup.addButtons([buttonTwo, buttonThree, buttonOne])
+        
+        // Present dialog
+        self.present(popup, animated: true, completion: nil)
+        
     }
+    
+
     
     @objc func doneStatePicker(){
         print("Tapped")
 
-        
+        self.view.becomeFirstResponder()
         self.view.endEditing(true)
     }
     
@@ -195,8 +217,81 @@ class SmartAlarmIntro: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func setupLocationManager(){
+        guard  let location = locationManager else {
+            fatalError()
+        }
+        location.delegate = self
+        getLocation(with: location)
+    }
+    
+    func getLocation(with locationManager: CLLocationManager) {
+        
+        //        print("Getting location")
+        // 1
+        let status  = CLLocationManager.authorizationStatus()   //get current authorization status
+        
+        // 2
+        if status == .notDetermined {   //checks current state of status
+            locationManager.requestWhenInUseAuthorization()
+            return
+        }
+        
+        // 3
+        if status == .denied || status == .restricted { //condition for denied auth
+            let alert = UIAlertController(title: "Location Services Disabled", message: "Please enable Location Services in Settings", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        // 4
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters  //defines the accuracy for the GPS location
+        locationManager.startUpdatingLocation() //starts searching for GPS location
+        
+    }
+    
     
 
+}
+
+extension SmartAlarmIntro: CLLocationManagerDelegate{
+    
+    //MARK: - Location Manager Delegate Methods
+    /***************************************************************/
+    
+    
+    //Write the didUpdateLocations method here:
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {    //GPS gathering adds to the end of the array w/ each update
+        let location = locations[locations.count - 1]   //fetches the last item in array -- most up to date location
+        if location.horizontalAccuracy > 0 {    //checks the location radius to ensure it is valid--  video (sec. 13 lecture 143 @ 7:50)
+            manager.stopUpdatingLocation()  //stops the GPS gathering
+            //            print ("longitude = \(location.coordinate.longitude), latitude = \(location.coordinate.latitude)")
+            
+            let latitude = String(location.coordinate.latitude)
+            let longitude = String(location.coordinate.longitude)
+            
+            print("Lat \(latitude), Long \(longitude)")
+            //            let params : [String: String] = ["lat" : latitude, "lon" : longitude, "appid" : APP_ID]
+            //            getWeatherData(url: WEATHER_URL, parameters: params)
+            smartAlarm.origin = ["lat" : latitude,
+                                 "lon" : longitude]
+            
+            performSegue(withIdentifier: "goToRoutineSetup", sender: self)
+        }
+    }
+    
+    //Write the didFailWithError method here:
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+        //        cityLabel.text = "Location Unavailable"
+    }
+    
 }
 
 extension SmartAlarmIntro: UIPickerViewDataSource{
@@ -222,35 +317,6 @@ extension SmartAlarmIntro: UIPickerViewDelegate{
     }
 }
 
-extension SmartAlarmIntro: CLLocationManagerDelegate{
-    
-    //MARK: - Location Manager Delegate Methods
-    /***************************************************************/
-    
-    
-    //Write the didUpdateLocations method here:
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {    //GPS gathering adds to the end of the array w/ each update
-        let location = locations[locations.count - 1]   //fetches the last item in array -- most up to date location
-        if location.horizontalAccuracy > 0 {    //checks the location radius to ensure it is valid--  video (sec. 13 lecture 143 @ 7:50)
-            self.locationManager.stopUpdatingLocation()  //stops the GPS gathering
-            //            print ("longitude = \(location.coordinate.longitude), latitude = \(location.coordinate.latitude)")
-            
-            let latitude = String(location.coordinate.latitude)
-            let longitude = String(location.coordinate.longitude)
-            
-            print("Lat \(latitude), Long \(longitude)")
-//            let params : [String: String] = ["lat" : latitude, "lon" : longitude, "appid" : APP_ID]
-//            getWeatherData(url: WEATHER_URL, parameters: params)
-        }
-    }
-    
-    //Write the didFailWithError method here:
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
-//        cityLabel.text = "Location Unavailable"
-    }
-    
-}
+
 
 

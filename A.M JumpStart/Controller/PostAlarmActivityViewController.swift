@@ -8,15 +8,18 @@
 
 import UIKit
 
-private let reuseIdentifier = "ActivityCell"
-private var activityList = ActivityList.activity
-//private var numActivities = activn
-private var selectedActivites = Array<String>()
+
+
 
 class PostAlarmActivityViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var activityCounter: UILabel!
+    
+    public var smartAlarm: SmartAlarm?
+    private let reuseIdentifier = "ActivityCell"
+    private var activityList = [TravelTask]()
+//    private var selectedActivites = Array<TravelTask>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +28,13 @@ class PostAlarmActivityViewController: UIViewController {
         // Register cell classes
         let nib = UINib(nibName: "PostAlarmActivityCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
-//        collectionView.register(FooterReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "collectionfooter")
         collectionView.delegate = self
         collectionView.dataSource = self
-        // Do any additional setup after loading the view.
+       
 
         setupLayout()
-        activityCounter.text = "(\(selectedActivites.count))"
+        activityCounter.text = "(\(smartAlarm?.activites.count ?? 99))"
+        loadActivities()
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,15 +42,18 @@ class PostAlarmActivityViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        let destinationVC = segue.destination as! ActivityDurationViewController
+        destinationVC.activitiesToSetUp = smartAlarm?.activites
     }
-    */
+    @IBAction func previousPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 
     func setupLayout(){
         let layout = UICollectionViewFlowLayout()
@@ -56,11 +62,20 @@ class PostAlarmActivityViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: true)
         
     }
+    
+    func loadActivities(){
+        
+        for task in ActivityList.activity{
+            let newTask = TravelTask(title: task)
+            activityList.append(newTask)
+        }
+        
+    }
 
     func removeActivity(at indextPath: IndexPath){
         
-        selectedActivites.append(activityList[indextPath.row])
-        activityCounter.text = "(\(selectedActivites.count))"
+        smartAlarm?.activites.append(activityList[indextPath.row])
+        activityCounter.text = "(\(smartAlarm?.activites.count ?? 99))"
         activityList.remove(at: indextPath.row)
         var paths = Array<IndexPath>()
         paths.append(indextPath)
@@ -71,11 +86,7 @@ class PostAlarmActivityViewController: UIViewController {
         }, completion: nil)
         
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! ActivityDurationViewController
-        destinationVC.activitiesToSetUp = selectedActivites
-    }
+
 
 }
 
@@ -115,7 +126,7 @@ extension PostAlarmActivityViewController: UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
                 let activityCell = cell as! PostAlarmActivityCell
-                activityCell.taskTitle.text = activityList[indexPath.row]
+                activityCell.task = activityList[indexPath.row]
 
 
     }
@@ -155,7 +166,7 @@ extension PostAlarmActivityViewController: UICollectionViewDelegate, UICollectio
     // MARK: UICollectionViewDelegate
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-                print(activityList[indexPath.row])
+//                print(activityList[indexPath.row])
                 removeActivity(at: indexPath)
     }
     

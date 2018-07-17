@@ -6,7 +6,6 @@ target 'A.M JumpStart' do
   use_frameworks!
 
   # Pods for A.M JumpStart
-	pod 'HGPlaceholders'
 	pod 'PopupDialog', '~> 0.7'
     pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
     pod 'SCLAlertView'
@@ -14,4 +13,5 @@ target 'A.M JumpStart' do
     pod 'SwiftyJSON'
     pod 'Alamofire'
     pod 'FoldingCell'
+    pod 'TextFieldEffects'
 end

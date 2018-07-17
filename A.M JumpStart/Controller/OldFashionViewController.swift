@@ -120,6 +120,7 @@ class OldFashionViewController: UIViewController {
                 let weekday = calendar.component(.weekday, from: currentDate)
                 let createdDate = self.createDate(weekday: weekday, hour: dateComponents.hour!, minute: dateComponents.minute!, year: year)
                 print(createdDate)
+                alarm.weeklySchedule = [DaysofWeek.allDays[weekday-1]]
                 self.createAlarm(title: "\(text.text!) Today", for: createdDate, using: alarm)
             }
             
@@ -137,12 +138,6 @@ class OldFashionViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    
-    @IBAction func repeatableSwitchClicked(_ sender: UISwitch) {
-        
-        self.tableView.isHidden = !sender.isOn
-  
-    }
     
     /////////////////////////////////////////////////////////////////
     
@@ -170,11 +165,12 @@ class OldFashionViewController: UIViewController {
         let repeats = reoccurringSwitch.isOn
         
         
-        //assign Nofication Center delegate to self
+        
         //get Notification Center object
         let center = alarm.center
         center.removeAllPendingNotificationRequests()
         
+        //assign Nofication Center delegate to home view
         center.delegate = homeViewController
         
         //get user access to user Notifcation center

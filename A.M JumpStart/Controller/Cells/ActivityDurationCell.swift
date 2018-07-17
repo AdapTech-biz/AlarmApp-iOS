@@ -17,16 +17,19 @@ protocol ActivityDurationDelegate {
 
 class ActivityDurationCell: FoldingCell {
     var delegate : ActivityDurationDelegate?
+    var task: TravelTask?{
+        didSet{
+            for label in activityLabels{
+                label.text = task?.title
+            }
+        }
+    }
     
 
     @IBOutlet weak var durationTime: GMStepper!
     @IBOutlet var activityLabels: [UILabel]!
-    @IBOutlet weak var minutesLabel: UILabel!{
-        
-        didSet{
-            delegate?.timeTotalUpdated(time: durationTime.value)
-        }
-    }
+   
+    @IBOutlet var durationLabels: [UILabel]!
     
     @IBOutlet weak var foldedBackground: RotatedView!
     

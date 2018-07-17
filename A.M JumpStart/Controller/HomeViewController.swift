@@ -9,7 +9,6 @@
 import UIKit
 import UserNotifications
 import AVFoundation
-import HGPlaceholders
 import PopupDialog
 import ChameleonFramework
 
@@ -18,7 +17,7 @@ class HomeViewController: UIViewController{
     //MARK: UIOutlet Controllers
     /////////////////////////////////////////////////////////////////
     
-    @IBOutlet weak var tableView: TableView!
+    @IBOutlet weak var tableView: UITableView!
     /////////////////////////////////////////////////////////////////
 
     
@@ -97,11 +96,7 @@ class HomeViewController: UIViewController{
 }
 
 
-extension HomeViewController: UNUserNotificationCenterDelegate, UITableViewDelegate, UITableViewDataSource, PlaceholderDelegate, AlarmCreatedDelegate{
-    
-    func view(_ view: Any, actionButtonTappedFor placeholder: Placeholder) {
-        tableView.showDefault()
-    }
+extension HomeViewController: UNUserNotificationCenterDelegate, UITableViewDelegate, UITableViewDataSource,AlarmCreatedDelegate{
     
     
     //MARK: UserNotificationCenter Delegate Methods

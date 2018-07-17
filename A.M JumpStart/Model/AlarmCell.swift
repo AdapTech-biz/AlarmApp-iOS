@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import HGPlaceholders
 
-class AlarmCell: PlaceholderTableViewCell {
+
+class AlarmCell: UITableViewCell {
     @IBOutlet weak var minuteLabel: UILabel!
     @IBOutlet weak var hourLabel: UILabel!
     

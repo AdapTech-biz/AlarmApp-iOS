@@ -196,10 +196,11 @@
                 <outlet property="foldedBackground" destination="O80-0U-f8w" id="uWh-cj-odp"/>
                 <outlet property="foregroundView" destination="O80-0U-f8w" id="WQf-Ur-1l7"/>
                 <outlet property="foregroundViewTop" destination="Jeu-8l-auH" id="YWb-CR-FS8"/>
-                <outlet property="minutesLabel" destination="zum-Lt-xxN" id="Ko1-dX-Qxf"/>
                 <outlet property="unfoldedBackground" destination="v8u-ns-Qka" id="UXr-33-YUA"/>
                 <outletCollection property="activityLabels" destination="MmS-nh-tgr" collectionClass="NSMutableArray" id="cJ8-8N-TBU"/>
                 <outletCollection property="activityLabels" destination="UKS-ab-jef" collectionClass="NSMutableArray" id="hNW-dp-nmy"/>
+                <outletCollection property="durationLabels" destination="zum-Lt-xxN" collectionClass="NSMutableArray" id="Inf-vg-LWj"/>
+                <outletCollection property="durationLabels" destination="1SJ-2j-P9N" collectionClass="NSMutableArray" id="GT3-89-b29"/>
             </connections>
             <point key="canvasLocation" x="34" y="256.5"/>
         </tableViewCell>

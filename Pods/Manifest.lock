@@ -6,21 +6,21 @@ PODS:
   - DynamicBlurView (2.0.2)
   - FoldingCell (3.1.1)
   - GMStepper (2.1)
-  - HGPlaceholders (0.3.0)
   - PopupDialog (0.7.1):
     - DynamicBlurView (~> 2.0)
   - SCLAlertView (0.8)
   - SwiftyJSON (4.1.0)
+  - TextFieldEffects (1.4.0)
 
 DEPENDENCIES:
   - Alamofire
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - FoldingCell
   - GMStepper
-  - HGPlaceholders
   - PopupDialog (~> 0.7)
   - SCLAlertView
   - SwiftyJSON
+  - TextFieldEffects
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -28,10 +28,10 @@ SPEC REPOS:
     - DynamicBlurView
     - FoldingCell
     - GMStepper
-    - HGPlaceholders
     - PopupDialog
     - SCLAlertView
     - SwiftyJSON
+    - TextFieldEffects
 
 EXTERNAL SOURCES:
   ChameleonFramework:
@@ -48,11 +48,11 @@ SPEC CHECKSUMS:
   DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
   FoldingCell: 238c33ae8d9cd655090c9c4c5ff32596cfd18c6e
   GMStepper: 8994824040d57d952134e409b7724d05a1a41c18
-  HGPlaceholders: 2df01c51b04a30acd0b8c9c7161c7cdde4541109
   PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
 
-PODFILE CHECKSUM: a562e823216ff5d7ad53ff777cc0f6a4ab5833e8
+PODFILE CHECKSUM: 5363898172f89a13fc05e9c52a23520e6017cb03
 
 COCOAPODS: 1.5.2

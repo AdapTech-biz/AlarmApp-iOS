@@ -18,7 +18,7 @@ fileprivate struct C {
 
 class ActivityDurationViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    var activitiesToSetUp : Array<String>?
+    var activitiesToSetUp : Array<TravelTask>?
     var cellHeights = (0..<2).map { _ in C.CellHeight.close }
     
 
@@ -83,8 +83,13 @@ extension ActivityDurationViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let durationCell = cell as! ActivityDurationCell
-        _ = durationCell.activityLabels.map({$0.text = activitiesToSetUp?[indexPath.row]})
-        durationCell.minutesLabel.text = "\(Int(durationCell.durationTime.value))"
+        durationCell.task = activitiesToSetUp?[indexPath.row]
+//        _ = durationCell.activityLabels.map({$0.text = activitiesToSetUp?[indexPath.row].title})
+        durationCell.task?.taskDuration = Int(durationCell.durationTime.value)
+        
+        _ = durationCell.durationLabels.map({$0.text = "\(durationCell.task?.taskDuration ?? 99)"})
+        
+//        durationCell.minutesLabel.text = "\(durationCell.task?.taskDuration ?? 99)"
         
         timeSum += Int(durationCell.durationTime.value)
         
@@ -108,7 +113,8 @@ extension ActivityDurationViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! ActivityDurationCell
-        cell.minutesLabel.text = "\(Int(cell.durationTime.value))"
+        cell.task?.taskDuration = Int(cell.durationTime.value)
+         _ = cell.durationLabels.map({$0.text = "\(cell.task?.taskDuration ?? 99)"})
         
         let duration = 0.5
         if cellHeights[indexPath.row] == C.CellHeight.close { // open cell

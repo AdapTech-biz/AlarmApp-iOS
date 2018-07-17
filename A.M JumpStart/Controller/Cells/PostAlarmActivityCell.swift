@@ -9,7 +9,13 @@
 import UIKit
 
 class PostAlarmActivityCell: UICollectionViewCell {
+    
 
+    var task: TravelTask?{
+        didSet {
+            taskTitle.text = task?.title
+        }
+    }
     @IBOutlet weak var taskTitle: UILabel!
     
     override func awakeFromNib() {
