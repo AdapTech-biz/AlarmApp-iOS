@@ -138,9 +138,9 @@ class SmartAlarmIntro: UIViewController {
                 let json = JSON(value)
                 print("JSON: \(json)")
                 let travelTimeInSec = json["rows"][0]["elements"][0]["duration"]["value"].intValue
-                let alarmTime = self.smartAlarm.desiredArrivalTime! - travelTimeInSec.seconds
+                let alarmTime = self.smartAlarm.desiredArrivalTime - travelTimeInSec.seconds
                 
-                print("Set you alarm for \(alarmTime) to arrive by \(self.smartAlarm.desiredArrivalTime ?? Date())")
+                print("Set you alarm for \(alarmTime) to arrive by \(self.smartAlarm.desiredArrivalTime )")
             case .failure(let error):
                 print(error)
                 
@@ -154,9 +154,9 @@ class SmartAlarmIntro: UIViewController {
     @IBAction func continuePressed(_ sender: Any) {
         
         smartAlarm.alarmTitle = titleTextField.text!
-        smartAlarm.destination = ["address": addressTextField.text!,
-                                  "city": cityTextField.text!,
-                                  "state": stateTextField.text!]
+        smartAlarm.destination?.address = addressTextField.text!
+        smartAlarm.destination?.city = cityTextField.text!
+        smartAlarm.destination?.state = stateTextField.text!
         smartAlarm.desiredArrivalTime = desiredTimePicker.date
         
         // Prepare the popup assets
@@ -276,11 +276,13 @@ extension SmartAlarmIntro: CLLocationManagerDelegate{
             print("Lat \(latitude), Long \(longitude)")
             //            let params : [String: String] = ["lat" : latitude, "lon" : longitude, "appid" : APP_ID]
             //            getWeatherData(url: WEATHER_URL, parameters: params)
-            smartAlarm.origin = ["lat" : latitude,
-                                 "lon" : longitude]
+            smartAlarm.origin?.lat = latitude
+            smartAlarm.origin?.lon = longitude
             
-             let destination = "\(smartAlarm.destination?["address"] ?? "")+\(smartAlarm.destination?["city"] ?? "")+\(smartAlarm.destination?["state"] ?? "")"
-            let origin = "\(smartAlarm.origin?["lat"] ?? ""),\(smartAlarm.origin?["lon"] ?? "")"
+            
+            
+            let destination = "\(smartAlarm.destination?.address ?? "")+\(smartAlarm.destination?.city ?? "")+\(smartAlarm.destination?.state ?? "")"
+            let origin = "\(smartAlarm.origin?.lat ?? ""),\(smartAlarm.origin?.lon ?? "")"
             
             let parameters : Parameters = ["origins" : origin,
                                            "destinations" : destination,

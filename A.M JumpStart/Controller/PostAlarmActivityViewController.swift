@@ -47,8 +47,9 @@ class PostAlarmActivityViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let smartAlarm = smartAlarm else { fatalError() }
         let destinationVC = segue.destination as! ActivityDurationViewController
-        destinationVC.activitiesToSetUp = smartAlarm?.activites
+        destinationVC.activitiesToSetUp = Array(smartAlarm.activites)
     }
     @IBAction func previousPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)

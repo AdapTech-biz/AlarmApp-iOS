@@ -11,8 +11,11 @@ import UserNotifications
 import AVFoundation
 import PopupDialog
 import ChameleonFramework
+import RealmSwift
 
 class HomeViewController: UIViewController{
+    
+    let realm = try! Realm()
     
     //MARK: UIOutlet Controllers
     /////////////////////////////////////////////////////////////////
@@ -26,7 +29,7 @@ class HomeViewController: UIViewController{
 
     var alarm : SystemAlarm?
     var noteSoundEffect : AVAudioPlayer?
-    var createdAlarms = [SystemAlarm]()
+    var createdAlarms : Results<SystemAlarm>!
     /////////////////////////////////////////////////////////////////
 
     
@@ -38,6 +41,7 @@ class HomeViewController: UIViewController{
         tableView.rowHeight = 70
         let nib = UINib(nibName: "AlarmCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "alarmCell")
+        loadAlarms()
 
     }
     
@@ -87,6 +91,13 @@ class HomeViewController: UIViewController{
         
         // Present dialog
         self.present(popup, animated: true, completion: nil)
+        
+    }
+    
+    func loadAlarms() {
+        
+        createdAlarms = realm.objects(SystemAlarm.self)
+        
         
     }
     
@@ -148,30 +159,35 @@ extension HomeViewController: UNUserNotificationCenterDelegate, UITableViewDeleg
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "alarmCell", for: indexPath) as! AlarmCell
         cell.accessoryType = .disclosureIndicator
-        let currentAlarm = createdAlarms[indexPath.row]
-        cell.alarmTitle.text = currentAlarm.alarmTitle
-        cell.hourLabel.text = "\(currentAlarm.alarmHour)"
-        cell.minuteLabel.text = String(format: "%02d", currentAlarm.alarmMin)
-        
-        if let weeklySchedule = currentAlarm.weeklySchedule{
-            for day in weeklySchedule{
+        if let currentAlarm = createdAlarms?[indexPath.row]{
+            cell.alarmTitle.text = currentAlarm.alarmTitle
+            cell.hourLabel.text = "\(currentAlarm.alarmHour)"
+            cell.minuteLabel.text = String(format: "%02d", currentAlarm.alarmMin)
+            
+            
+            for day in currentAlarm.weeklySchedule{
                 switch day{
-                case .Sunday: cell.sundayLabel.textColor = UIColor.flatMint
-                case .Monday: cell.mondayLabel.textColor = UIColor.flatMint
-                case .Tuesday: cell.tuesdayLabel.textColor = UIColor.flatMint
-                case .Wednesday: cell.wednesdayLabel.textColor = UIColor.flatMint
-                case .Thursday: cell.thursdayLabel.textColor = UIColor.flatMint
-                case .Friday: cell.fridayLabel.textColor = UIColor.flatMint
-                case .Saturday: cell.saturdayLabel.textColor = UIColor.flatMint
+                case 1: cell.sundayLabel.textColor = UIColor.flatMint
+                case 2: cell.mondayLabel.textColor = UIColor.flatMint
+                case 3: cell.tuesdayLabel.textColor = UIColor.flatMint
+                case 4: cell.wednesdayLabel.textColor = UIColor.flatMint
+                case 5: cell.thursdayLabel.textColor = UIColor.flatMint
+                case 6: cell.fridayLabel.textColor = UIColor.flatMint
+                default: cell.saturdayLabel.textColor = UIColor.flatMint
                 }
             }
+        }else{
+            cell.alarmTitle.text = "No Alarms To Display"
+            cell.hourLabel.text = ""
+            cell.minuteLabel.text = ""
         }
-        
+
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return createdAlarms.count
+       return createdAlarms?.count ?? 1
+        
     }
     //////////////////////////////////////////////////////////////////
     
@@ -181,11 +197,15 @@ extension HomeViewController: UNUserNotificationCenterDelegate, UITableViewDeleg
     
     func newAlarmCreated(createdAlarm: SystemAlarm) {
         
-        createdAlarms.append(createdAlarm)
-        //save with relm or core data
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+        //save with relm
+        do{
+            try realm.write {
+                realm.add(createdAlarm)
+            }
+        }catch{
+            print("Realm error \(error)")
         }
+        self.tableView.reloadData()
     }
     /////////////////////////////////////////////////////////////////
     

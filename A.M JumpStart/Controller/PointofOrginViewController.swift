@@ -93,13 +93,13 @@ class PointofOrginViewController: UIViewController {
 
     @IBAction func continuePressed(_ sender: Any) {
         
-        smartAlarm?.origin = ["address": addressTextField.text!,
-                              "city": cityTextField.text!,
-                              "state": stateTextField.text!]
+        smartAlarm?.origin?.address = addressTextField.text!
+        smartAlarm?.origin?.city = cityTextField.text!
+        smartAlarm?.origin?.state = stateTextField.text!
         guard let smartAlarm = smartAlarm else {fatalError()}
         
-        let origin = "\(smartAlarm.origin?["address"] ?? "")+\(smartAlarm.origin?["city"] ?? "")+\(smartAlarm.origin?["state"] ?? "")"
-        let destination = "\(smartAlarm.destination?["address"] ?? "")+\(smartAlarm.destination?["city"] ?? "")+\(smartAlarm.destination?["state"] ?? "")"
+        let origin = "\(smartAlarm.origin?.address ?? "")+\(smartAlarm.origin?.city ?? "")+\(smartAlarm.origin?.state ?? "")"
+        let destination = "\(smartAlarm.destination?.address ?? "")+\(smartAlarm.destination?.city ?? "")+\(smartAlarm.destination?.state ?? "")"
         
         let parameters : Parameters = ["origins" : origin,
                                        "destinations" : destination,

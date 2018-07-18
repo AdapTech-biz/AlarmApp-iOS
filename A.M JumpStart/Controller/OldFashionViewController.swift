@@ -11,6 +11,7 @@ import UserNotifications
 import AVFoundation
 import ChameleonFramework
 import SCLAlertView
+import RealmSwift
 
 protocol AlarmCreatedDelegate {
     func newAlarmCreated(createdAlarm: SystemAlarm)
@@ -54,11 +55,13 @@ class OldFashionViewController: UIViewController {
         DayofWeek(day: DaysofWeek.Saturday)
     ]
     var alarm : SystemAlarm?
+    let realm = try! Realm()
     /////////////////////////////////////////////////////////////////
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         // Do any additional setup after loading the view.
         tableView.dataSource = self
@@ -73,6 +76,8 @@ class OldFashionViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         if let alarm = alarm{
             self.delegate?.newAlarmCreated(createdAlarm: alarm)
+            
+        
         }
     }
     
@@ -96,8 +101,7 @@ class OldFashionViewController: UIViewController {
             alarm.center.delegate = self.homeViewController
             alarm.isRepeatable = self.reoccurringSwitch.isOn
 
-//            print(self.selectedDays)
-            alarm.weeklySchedule = self.selectedDays
+            _ = self.selectedDays.map {alarm.weeklySchedule.insert($0.dateComponentValue)}
             alarm.createAlarm(from: self.timePicker)
             self.dismiss(animated: true, completion: nil)
             

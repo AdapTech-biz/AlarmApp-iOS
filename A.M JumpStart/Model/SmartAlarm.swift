@@ -7,21 +7,24 @@
 //
 
 import Foundation
+import RealmSwift
 
 
 class SmartAlarm: SystemAlarm{
     
-    var alarmName: String?
-    var destination: [String: String]?
-    var origin: [String: String]?
-    var activites = [TravelTask]()
-    var departureTime: Date?
-    var desiredArrivalTime: Date?
+    @objc dynamic var alarmName : String = ""
+    @objc dynamic var destination : Destination?
+    @objc dynamic var origin : Destination?
+    var activites = List<TravelTask>()
+    @objc dynamic var departureTime: Date = Date()
+    @objc dynamic var desiredArrivalTime: Date = Date()
     
-    override init(title: String) {
+    convenience init(title: String) {
+        self.init(title: title)
         self.alarmName  = title
-        super.init(title: title)
+        
     }
+    
     
     
 }

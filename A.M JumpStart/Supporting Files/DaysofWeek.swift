@@ -7,9 +7,13 @@
 //
 
 import Foundation
+import RealmSwift
 
 
-enum DaysofWeek: CustomStringConvertible{
+enum DaysofWeek:CustomStringConvertible{
+    
+    
+    
     var description: String{
         switch self {
         // Use Internationalization, as appropriate.

@@ -8,6 +8,11 @@ PODS:
   - GMStepper (2.1)
   - PopupDialog (0.7.1):
     - DynamicBlurView (~> 2.0)
+  - Realm (3.7.4):
+    - Realm/Headers (= 3.7.4)
+  - Realm/Headers (3.7.4)
+  - RealmSwift (3.7.4):
+    - Realm (= 3.7.4)
   - SCLAlertView (0.8)
   - SwiftyJSON (4.1.0)
   - TextFieldEffects (1.4.0)
@@ -19,6 +24,7 @@ DEPENDENCIES:
   - FoldingCell
   - GMStepper
   - PopupDialog (~> 0.7)
+  - RealmSwift
   - SCLAlertView
   - SwiftyJSON
   - TextFieldEffects
@@ -31,6 +37,8 @@ SPEC REPOS:
     - FoldingCell
     - GMStepper
     - PopupDialog
+    - Realm
+    - RealmSwift
     - SCLAlertView
     - SwiftyJSON
     - TextFieldEffects
@@ -52,11 +60,13 @@ SPEC CHECKSUMS:
   FoldingCell: 238c33ae8d9cd655090c9c4c5ff32596cfd18c6e
   GMStepper: 8994824040d57d952134e409b7724d05a1a41c18
   PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
+  Realm: a469bb59e33f9926102ccaea4349822c53b9117e
+  RealmSwift: a45861b21c180f5cf0f122144b9759fa8dde3e9e
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
   TimeIntervals: 1ae58fc906d35311c5ca84a689c86c69c2209575
 
-PODFILE CHECKSUM: 1328bc2b723b3d28ed8e6a401e4c9f46fa43dc10
+PODFILE CHECKSUM: 0c35dde602fa9d48654727c398d4f26da72a04c2
 
 COCOAPODS: 1.5.2

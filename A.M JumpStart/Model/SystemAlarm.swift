@@ -10,31 +10,30 @@ import Foundation
 import UIKit
 import UserNotifications
 import AVFoundation
+import RealmSwift
 
-class SystemAlarm{
+class SystemAlarm: Object{
     
-    @objc dynamic let center : UNUserNotificationCenter
-    @objc dynamic let content : UNMutableNotificationContent
-    @objc dynamic var trigger : UNCalendarNotificationTrigger?
-    @objc dynamic var requests = [UNNotificationRequest]()
-    @objc dynamic var notificationActions = [UNNotificationAction]()
-    @objc dynamic var delegate : UNUserNotificationCenterDelegate?
-    @objc dynamic var alarmTitle : String
-    var weeklySchedule : Set<DaysofWeek>?
+    let center = UNUserNotificationCenter.current()
+    let content = UNMutableNotificationContent()
+    var requests = [UNNotificationRequest]()
+    var notificationActions = [UNNotificationAction]()
+    @objc dynamic var alarmTitle : String = ""
+    var weeklySchedule = Set<Int>()
     @objc dynamic var alarmHour : Int = 0
     @objc dynamic var alarmMin : Int = 0
     @objc dynamic var isRepeatable : Bool = false
     
     
-    init(title: String ) {
-        center = UNUserNotificationCenter.current()
-        content = UNMutableNotificationContent()
-        
+   convenience init(title: String ) {
+        self.init()
+//        self.init(title: title)
         alarmTitle = title
         self.constructContent()
    
     }
     
+
     func constructContent(){
         
         let firstAction = makeAlertAction(withTitle: "Snooze", withIdentifier: "SNOOZE")
@@ -124,12 +123,12 @@ class SystemAlarm{
         components.month = Calendar.current.component(.month, from: Date())
         components.timeZone = .current
         
-        guard let weeklySechedule = weeklySchedule else { fatalError() }
+//        guard let weeklySechedule = weeklySchedule else { fatalError() }
         
-        if (!weeklySechedule.isEmpty){
-            for day in weeklySechedule{
+        if (!weeklySchedule.isEmpty){
+            for day in weeklySchedule{
                 
-                components.weekday = day.dateComponentValue // sunday = 1 ... saturday = 7
+                components.weekday = day // sunday = 1 ... saturday = 7
                 
             let createdDate = calendar.date(from: components)!
             registerAlarm(for: createdDate, isrepeated: isRepeatable)

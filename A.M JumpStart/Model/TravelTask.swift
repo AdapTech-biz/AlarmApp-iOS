@@ -7,14 +7,17 @@
 //
 
 import Foundation
+import RealmSwift
 
 
-class TravelTask{
-    let title: String
-    var taskDuration: Int = 0
+class TravelTask: Object{
+    @objc dynamic var title: String = ""
+    @objc dynamic var taskDuration: Int = 0
+    var parentAlarm = LinkingObjects(fromType: SmartAlarm.self, property: "activites")
     
     
-    init(title: String) {
+    convenience init(title: String) {
+        self.init(title: title)
         self.title = title
     }
 }

@@ -15,4 +15,5 @@ target 'A.M JumpStart' do
     pod 'FoldingCell'
     pod 'TextFieldEffects'
     pod 'TimeIntervals', '~> 1.0.0'
+    pod 'RealmSwift'
 end

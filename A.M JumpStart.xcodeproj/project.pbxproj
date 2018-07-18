@@ -34,6 +34,7 @@
 		C67B9BEB20BCBD2600E7F0D0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B9BEA20BCBD2600E7F0D0 /* HomeViewController.swift */; };
 		C67B9BF020BCBD2900E7F0D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C67B9BEF20BCBD2900E7F0D0 /* Assets.xcassets */; };
 		C67B9BF320BCBD2900E7F0D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C67B9BF120BCBD2900E7F0D0 /* LaunchScreen.storyboard */; };
+		C6B4E1C920FF7F2500C467B6 /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B4E1C820FF7F2500C467B6 /* Destination.swift */; };
 		C6CD3F3520E4694800AC61ED /* Foldable.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6CD3F3320E4694800AC61ED /* Foldable.xib */; };
 		C6CD3F3720EAFE7200AC61ED /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CD3F3620EAFE7200AC61ED /* CustomView.swift */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,7 @@
 		C67B9BEF20BCBD2900E7F0D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C67B9BF220BCBD2900E7F0D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C67B9BF420BCBD2900E7F0D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C6B4E1C820FF7F2500C467B6 /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		C6CD3F3320E4694800AC61ED /* Foldable.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Foldable.xib; sourceTree = "<group>"; };
 		C6CD3F3620EAFE7200AC61ED /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,6 +133,7 @@
 				C6389E4120D72C0F0068AFB7 /* DayOfWeek.swift */,
 				C632699520FE815C0076777B /* SmartAlarm.swift */,
 				C632699720FE82550076777B /* TravelTask.swift */,
+				C6B4E1C820FF7F2500C467B6 /* Destination.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -325,6 +328,8 @@
 				"${BUILT_PRODUCTS_DIR}/FoldingCell/FoldingCell.framework",
 				"${BUILT_PRODUCTS_DIR}/GMStepper/GMStepper.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
@@ -338,6 +343,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FoldingCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GMStepper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
@@ -371,6 +378,7 @@
 				C64FADF520DC4F5B0057C8DE /* ActivityList.swift in Sources */,
 				C64FADEF20DC4E000057C8DE /* PostAlarmActivityViewController.swift in Sources */,
 				C6389E4220D72C0F0068AFB7 /* DayOfWeek.swift in Sources */,
+				C6B4E1C920FF7F2500C467B6 /* Destination.swift in Sources */,
 				C632699620FE815C0076777B /* SmartAlarm.swift in Sources */,
 				C6389E1B20D5991A0068AFB7 /* SmartAlarmIntro.swift in Sources */,
 				C60358F320F1289200B2AE3A /* PointofOrginViewController.swift in Sources */,
