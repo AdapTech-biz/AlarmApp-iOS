@@ -7,21 +7,23 @@
 //
 
 import Foundation
+import UIKit
 import UserNotifications
 import AVFoundation
 
 class SystemAlarm{
     
-    let center : UNUserNotificationCenter
-    let content : UNMutableNotificationContent
-    var trigger : UNCalendarNotificationTrigger?
-    var requests = [UNNotificationRequest]()
-    var notificationActions = [UNNotificationAction]()
-    var delegate : UNUserNotificationCenterDelegate?
-    var alarmTitle : String
+    @objc dynamic let center : UNUserNotificationCenter
+    @objc dynamic let content : UNMutableNotificationContent
+    @objc dynamic var trigger : UNCalendarNotificationTrigger?
+    @objc dynamic var requests = [UNNotificationRequest]()
+    @objc dynamic var notificationActions = [UNNotificationAction]()
+    @objc dynamic var delegate : UNUserNotificationCenterDelegate?
+    @objc dynamic var alarmTitle : String
     var weeklySchedule : Set<DaysofWeek>?
-    var alarmHour : Int = 0
-    var alarmMin : Int = 0
+    @objc dynamic var alarmHour : Int = 0
+    @objc dynamic var alarmMin : Int = 0
+    @objc dynamic var isRepeatable : Bool = false
     
     
     init(title: String ) {
@@ -57,7 +59,7 @@ class SystemAlarm{
     //MARK: Request Access Notification Center
     //////////////////////////////////////////////////////////////////
     
-    func getNotificationAccess(to center: UNUserNotificationCenter){
+    func getNotificationAccess(){
         
         center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
             
@@ -101,7 +103,82 @@ class SystemAlarm{
     ///////////////////////////////////////////////////////////////////
     
     
+    //Create Date from picker selected value.
+    func createAlarm(from timePicker: UIDatePicker){
+        
+        let calendar = Calendar(identifier: .gregorian)
+        var calendarUnitFlags = Set<Calendar.Component>()
+        calendarUnitFlags.insert(.weekday)
+        calendarUnitFlags.insert(.hour)
+        calendarUnitFlags.insert(.minute)
+        var dateComponents = NSCalendar.current.dateComponents(calendarUnitFlags, from: timePicker.date)
+        
+        
+        let currentDate = Date()
+        let year = Calendar.current.component(.year, from: currentDate)
+        var components = DateComponents()
+        components.hour = dateComponents.hour!
+        components.minute = dateComponents.minute!
+        components.year = year
+        components.weekOfYear = Calendar.current.component(.weekOfYear, from: Date())
+        components.month = Calendar.current.component(.month, from: Date())
+        components.timeZone = .current
+        
+        guard let weeklySechedule = weeklySchedule else { fatalError() }
+        
+        if (!weeklySechedule.isEmpty){
+            for day in weeklySechedule{
+                
+                components.weekday = day.dateComponentValue // sunday = 1 ... saturday = 7
+                
+            let createdDate = calendar.date(from: components)!
+            registerAlarm(for: createdDate, isrepeated: isRepeatable)
+            }
+        }else{
+           
+            var weekday = calendar.component(.weekday, from: currentDate)
+            
+            if(timePicker.date < currentDate){
+                switch (weekday){
+                case 1...6: weekday += 1
+                default: weekday = 1
+                }
+            }
+            components.weekday = weekday
+            let createdDate = calendar.date(from: components)!
+           registerAlarm(for: createdDate, isrepeated: isRepeatable)
+        }
+        
+       
+    }
     
+   private func registerAlarm(for date:  Date, isrepeated: Bool)  {
+        
+        //get user access to user Notifcation center
+        getNotificationAccess()
+   
+        let triggerDate = Calendar.current.dateComponents([.weekday,.hour,.minute,.second,], from: date)
+        alarmHour = triggerDate.hour!
+        alarmMin = triggerDate.minute!
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: isrepeated)
+        
+        let request = UNNotificationRequest(identifier: alarmTitle, content: content, trigger: trigger)
+        center.add(request) { (error) in
+            if let error = error {
+                print(error.localizedDescription)
+                fatalError()
+            }else{
+                self.requests.append(request)
+                
+            }
+        }
+        
+    }
+    
+    func cancelAllPendingAlarms()  {
+        center.removeAllPendingNotificationRequests()
+    }
 
     
     

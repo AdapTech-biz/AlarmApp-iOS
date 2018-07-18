@@ -324,6 +324,7 @@
                         <outlet property="addressTextField" destination="oeh-Tp-P4F" id="DGt-vN-VBI"/>
                         <outlet property="bottomConstraint" destination="7qQ-a4-YTo" id="XKx-ar-IT8"/>
                         <outlet property="cityTextField" destination="5sF-7S-i0k" id="nus-OO-Sxa"/>
+                        <outlet property="desiredTimePicker" destination="TWL-fl-Jf6" id="4ti-Y5-jtb"/>
                         <outlet property="formStackView" destination="nco-JK-Xbi" id="35h-90-C9c"/>
                         <outlet property="stateTextField" destination="ho3-7o-Vp3" id="dmi-tq-0gN"/>
                         <outlet property="titleTextField" destination="KSz-a1-T8a" id="kX5-C7-UCD"/>
@@ -522,7 +523,7 @@
                         <outlet property="bottomConstraint" destination="ySG-sq-fa3" id="OMO-xp-8LN"/>
                         <outlet property="cityTextField" destination="MJQ-gV-ktT" id="L5b-ZD-WaV"/>
                         <outlet property="stateTextField" destination="U7l-Gf-94b" id="x56-bc-50x"/>
-                        <segue destination="a6p-9V-Dwo" kind="presentation" id="x8M-zK-QFg"/>
+                        <segue destination="a6p-9V-Dwo" kind="presentation" identifier="goToRoutineSetup" id="x8M-zK-QFg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EaZ-sa-1SM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -907,6 +908,6 @@
         <image name="sunrise" width="99" height="53"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="x8M-zK-QFg"/>
+        <segue reference="Lj6-rL-FL0"/>
     </inferredMetricsTieBreakers>
 </document>

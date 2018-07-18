@@ -14,4 +14,5 @@ target 'A.M JumpStart' do
     pod 'Alamofire'
     pod 'FoldingCell'
     pod 'TextFieldEffects'
+    pod 'TimeIntervals', '~> 1.0.0'
 end

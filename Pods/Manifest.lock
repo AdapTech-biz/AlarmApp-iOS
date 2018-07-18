@@ -11,6 +11,7 @@ PODS:
   - SCLAlertView (0.8)
   - SwiftyJSON (4.1.0)
   - TextFieldEffects (1.4.0)
+  - TimeIntervals (1.0.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -21,6 +22,7 @@ DEPENDENCIES:
   - SCLAlertView
   - SwiftyJSON
   - TextFieldEffects
+  - TimeIntervals (~> 1.0.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -32,6 +34,7 @@ SPEC REPOS:
     - SCLAlertView
     - SwiftyJSON
     - TextFieldEffects
+    - TimeIntervals
 
 EXTERNAL SOURCES:
   ChameleonFramework:
@@ -52,7 +55,8 @@ SPEC CHECKSUMS:
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
+  TimeIntervals: 1ae58fc906d35311c5ca84a689c86c69c2209575
 
-PODFILE CHECKSUM: 5363898172f89a13fc05e9c52a23520e6017cb03
+PODFILE CHECKSUM: 1328bc2b723b3d28ed8e6a401e4c9f46fa43dc10
 
 COCOAPODS: 1.5.2

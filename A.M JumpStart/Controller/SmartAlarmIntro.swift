@@ -11,8 +11,12 @@ import PopupDialog
 import CoreLocation
 import SwiftyJSON
 import Alamofire
+import TimeIntervals
 
 class SmartAlarmIntro: UIViewController {
+    
+    private let API_KEY = "AIzaSyD5xKj3wd0xJ29AI4KI6a_wv8bbmsrqNOQ"
+
     
     var locationManager: CLLocationManager?{
         didSet{
@@ -29,11 +33,9 @@ class SmartAlarmIntro: UIViewController {
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var stateTextField: UITextField!
-    
     @IBOutlet weak var formStackView: UIStackView!
-
-    
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var desiredTimePicker: UIDatePicker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,33 +57,9 @@ class SmartAlarmIntro: UIViewController {
         stateTextField.inputAccessoryView = toolbar
         stateTextField.inputView = states
         
-        
-        // Do any additional setup after loading the view.
-        //TODO:Set up the location manager here.
-
-
-
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-//        let API_KEY = "&key=AIzaSyD5xKj3wd0xJ29AI4KI6a_wv8bbmsrqNOQ"
-//        let url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=Dover+DE&destinations=509+NW+Backwoods+Rd+Moyock".addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
-//
-//        Alamofire.request(url!+API_KEY, method: .get).validate().responseJSON { response in
-//            switch response.result {
-//            case .success(let value):
-//                let json = JSON(value)
-//                print("JSON: \(json)")
-//                print(json["rows"][0]["elements"])
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
-        
         displayPopUp()
     }
     
@@ -131,20 +109,11 @@ class SmartAlarmIntro: UIViewController {
 
     
 
-    /*
+
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        smartAlarm.alarmTitle = titleTextField.text!
-       smartAlarm.destination = ["address": addressTextField.text!,
-                              "city": cityTextField.text!,
-                              "state": stateTextField.text!]
+        
         
         switch segue.identifier {
         case "goToManualDepart":
@@ -158,7 +127,37 @@ class SmartAlarmIntro: UIViewController {
         
     }
     
+    func getTravelInfo(parameters: Parameters){
+        
+        let url = "https://maps.googleapis.com/maps/api/distancematrix/json"
+        
+        Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default).validate().responseJSON { (response) in
+            
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                print("JSON: \(json)")
+                let travelTimeInSec = json["rows"][0]["elements"][0]["duration"]["value"].intValue
+                let alarmTime = self.smartAlarm.desiredArrivalTime! - travelTimeInSec.seconds
+                
+                print("Set you alarm for \(alarmTime) to arrive by \(self.smartAlarm.desiredArrivalTime ?? Date())")
+            case .failure(let error):
+                print(error)
+                
+            }
+            
+        self.performSegue(withIdentifier: "goToRoutineSetup", sender: self)
+            
+        }
+    }
+    
     @IBAction func continuePressed(_ sender: Any) {
+        
+        smartAlarm.alarmTitle = titleTextField.text!
+        smartAlarm.destination = ["address": addressTextField.text!,
+                                  "city": cityTextField.text!,
+                                  "state": stateTextField.text!]
+        smartAlarm.desiredArrivalTime = desiredTimePicker.date
         
         // Prepare the popup assets
         let title = "Travel From"
@@ -185,7 +184,6 @@ class SmartAlarmIntro: UIViewController {
         // This button will not the dismiss the dialog
         let buttonThree = DefaultButton(title: "Enter Depart Location") {
             self.performSegue(withIdentifier: "goToManualDepart", sender: self)
-            print("Manual entry...")
         }
        
 
@@ -226,8 +224,7 @@ class SmartAlarmIntro: UIViewController {
     }
     
     func getLocation(with locationManager: CLLocationManager) {
-        
-        //        print("Getting location")
+
         // 1
         let status  = CLLocationManager.authorizationStatus()   //get current authorization status
         
@@ -282,7 +279,17 @@ extension SmartAlarmIntro: CLLocationManagerDelegate{
             smartAlarm.origin = ["lat" : latitude,
                                  "lon" : longitude]
             
-            performSegue(withIdentifier: "goToRoutineSetup", sender: self)
+             let destination = "\(smartAlarm.destination?["address"] ?? "")+\(smartAlarm.destination?["city"] ?? "")+\(smartAlarm.destination?["state"] ?? "")"
+            let origin = "\(smartAlarm.origin?["lat"] ?? ""),\(smartAlarm.origin?["lon"] ?? "")"
+            
+            let parameters : Parameters = ["origins" : origin,
+                                           "destinations" : destination,
+                                           "key" : API_KEY]
+            
+            getTravelInfo(parameters: parameters)
+
+            
+//            performSegue(withIdentifier: "goToRoutineSetup", sender: self)
         }
     }
     

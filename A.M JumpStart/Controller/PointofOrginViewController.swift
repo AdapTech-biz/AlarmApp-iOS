@@ -119,7 +119,7 @@ class PointofOrginViewController: UIViewController {
             case .success(let value):
                 let json = JSON(value)
                 print("JSON: \(json)")
-                print(json["rows"][0]["elements"])
+                print(json["rows"][0]["elements"][0]["duration"]["value"])
             case .failure(let error):
                 print(error)
                 

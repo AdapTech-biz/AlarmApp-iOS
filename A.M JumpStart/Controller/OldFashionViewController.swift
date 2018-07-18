@@ -73,7 +73,6 @@ class OldFashionViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         if let alarm = alarm{
             self.delegate?.newAlarmCreated(createdAlarm: alarm)
-
         }
     }
     
@@ -86,6 +85,7 @@ class OldFashionViewController: UIViewController {
             showCloseButton: false,
             showCircularIcon: true
         )
+        
         let alertViewIcon = UIImage(named: "alarmClockIcon")
         let alert = SCLAlertView(appearance: appearance)
         let text = alert.addTextField("Label for Alarm...")
@@ -93,43 +93,18 @@ class OldFashionViewController: UIViewController {
             
             self.alarm = SystemAlarm(title: text.text!)
             guard let alarm = self.alarm else {fatalError()}
-            
-            var calendarUnitFlags = Set<Calendar.Component>()
-            calendarUnitFlags.insert(.weekday)
-            calendarUnitFlags.insert(.hour)
-            calendarUnitFlags.insert(.minute)
-            
-            var dateComponents = NSCalendar.current.dateComponents(calendarUnitFlags, from: self.timePicker.date)
-            let calendar = Calendar.current
-            let currentDate = Date()
-            
-            let year = calendar.component(.year, from: currentDate)
-            
-            print(self.selectedDays)
-           
-            if !self.selectedDays.isEmpty{
-                
+            alarm.center.delegate = self.homeViewController
+            alarm.isRepeatable = self.reoccurringSwitch.isOn
+
+//            print(self.selectedDays)
             alarm.weeklySchedule = self.selectedDays
-                
-            for day in self.selectedDays{
-                let createdDate = self.createDate(weekday: day.dateComponentValue, hour: dateComponents.hour!, minute: dateComponents.minute!, year: year)
-                print(createdDate)
-                self.createAlarm(title: "\(text.text!) \(day.description)", for: createdDate, using: alarm)
-                }
-            }else{
-                let weekday = calendar.component(.weekday, from: currentDate)
-                let createdDate = self.createDate(weekday: weekday, hour: dateComponents.hour!, minute: dateComponents.minute!, year: year)
-                print(createdDate)
-                alarm.weeklySchedule = [DaysofWeek.allDays[weekday-1]]
-                self.createAlarm(title: "\(text.text!) Today", for: createdDate, using: alarm)
-            }
+            alarm.createAlarm(from: self.timePicker)
+            self.dismiss(animated: true, completion: nil)
             
         }
         
         alert.showEdit("Name new alarm", subTitle: "Make it yours", circleIconImage: alertViewIcon)
         
-        
-  
     }
     
     
@@ -137,71 +112,9 @@ class OldFashionViewController: UIViewController {
     @IBAction func backButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
-    
-    /////////////////////////////////////////////////////////////////
-    
-    //MARK: Functionality to create alarms
-    /////////////////////////////////////////////////////////////////
-    
-    //Create Date from picker selected value.
-    func createDate(weekday: Int, hour: Int, minute: Int, year: Int)->Date{
-        
-        var components = DateComponents()
-        components.hour = hour
-        components.minute = minute
-        components.year = year
-        components.weekday = weekday // sunday = 1 ... saturday = 7
-        components.weekOfYear = Calendar.current.component(.weekOfYear, from: Date())
-        components.month = Calendar.current.component(.month, from: Date())
-        components.timeZone = .current
-        
-        let calendar = Calendar(identifier: .gregorian)
-        return calendar.date(from: components)!
-    }
-    
-    func createAlarm(title: String = "Alarm", for date:  Date, using alarm: SystemAlarm) {
-        
-        let repeats = reoccurringSwitch.isOn
-        
-        
-        
-        //get Notification Center object
-        let center = alarm.center
-        center.removeAllPendingNotificationRequests()
-        
-        //assign Nofication Center delegate to home view
-        center.delegate = homeViewController
-        
-        //get user access to user Notifcation center
-        alarm.getNotificationAccess(to: center)
 
-        
-        let content = alarm.content
-
-        
-        let triggerDate = Calendar.current.dateComponents([.weekday,.hour,.minute,.second,], from: date)
-            alarm.alarmHour = triggerDate.hour!
-            alarm.alarmMin = triggerDate.minute!
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: repeats)
-        
-        let request = UNNotificationRequest(identifier: title, content: content, trigger: trigger)
-        alarm.center.add(request) { (error) in
-            if let error = error {
-                print(error)
-            }else{
-              alarm.requests.append(request)
-            }
-        }
-       
-        self.dismiss(animated: true, completion: nil)
-        
-    }
     /////////////////////////////////////////////////////////////////
-
-    
-    
+  
 }
 
 extension OldFashionViewController: UITableViewDelegate, UITableViewDataSource{

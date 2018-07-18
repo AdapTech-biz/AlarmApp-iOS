@@ -16,6 +16,7 @@ class SmartAlarm: SystemAlarm{
     var origin: [String: String]?
     var activites = [TravelTask]()
     var departureTime: Date?
+    var desiredArrivalTime: Date?
     
     override init(title: String) {
         self.alarmName  = title
