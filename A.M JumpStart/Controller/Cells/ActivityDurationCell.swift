@@ -12,7 +12,7 @@ import FoldingCell
 
 
 protocol ActivityDurationDelegate {
-    func timeTotalUpdated(time: Double)
+    func timeUpdated(time: Double)
 }
 
 class ActivityDurationCell: FoldingCell {

@@ -16,4 +16,5 @@ target 'A.M JumpStart' do
     pod 'TextFieldEffects'
     pod 'TimeIntervals', '~> 1.0.0'
     pod 'RealmSwift'
+     pod 'SnapKit', '~> 4.0.0'
 end

@@ -20,6 +20,12 @@ class SystemAlarm: Object{
     var notificationActions = [UNNotificationAction]()
     @objc dynamic var alarmTitle : String = ""
     var weeklySchedule = Set<Int>()
+    @objc dynamic var alarmTime = Date(){
+        willSet{
+            alarmHour = Calendar.current.component(.hour, from: newValue)
+            alarmMin = Calendar.current.component(.minute, from: newValue)
+        }
+    }
     @objc dynamic var alarmHour : Int = 0
     @objc dynamic var alarmMin : Int = 0
     @objc dynamic var isRepeatable : Bool = false
@@ -27,7 +33,6 @@ class SystemAlarm: Object{
     
    convenience init(title: String ) {
         self.init()
-//        self.init(title: title)
         alarmTitle = title
         self.constructContent()
    
@@ -151,7 +156,7 @@ class SystemAlarm: Object{
        
     }
     
-   private func registerAlarm(for date:  Date, isrepeated: Bool)  {
+   public func registerAlarm(for date:  Date, isrepeated: Bool)  {
         
         //get user access to user Notifcation center
         getNotificationAccess()

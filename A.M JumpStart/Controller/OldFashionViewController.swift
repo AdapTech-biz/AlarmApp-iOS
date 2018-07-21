@@ -11,11 +11,10 @@ import UserNotifications
 import AVFoundation
 import ChameleonFramework
 import SCLAlertView
-import RealmSwift
 
-protocol AlarmCreatedDelegate {
-    func newAlarmCreated(createdAlarm: SystemAlarm)
-}
+//protocol AlarmCreatedDelegate {
+//    func newAlarmCreated(createdAlarm: SystemAlarm)
+//}
 
 
 class OldFashionViewController: UIViewController {
@@ -41,7 +40,7 @@ class OldFashionViewController: UIViewController {
     //MARK: Class Variables
     /////////////////////////////////////////////////////////////////
 
-    var delegate : AlarmCreatedDelegate?
+    var delegate : ClassicAlarmCreatedDelegate?
     var selectedDays = Set<DaysofWeek>()
     var colorArray = ColorSchemeOf(ColorScheme.complementary, color: FlatBlue(), isFlatScheme: true)
     var homeViewController : HomeViewController?
@@ -55,7 +54,6 @@ class OldFashionViewController: UIViewController {
         DayofWeek(day: DaysofWeek.Saturday)
     ]
     var alarm : SystemAlarm?
-    let realm = try! Realm()
     /////////////////////////////////////////////////////////////////
 
     
@@ -77,7 +75,6 @@ class OldFashionViewController: UIViewController {
         if let alarm = alarm{
             self.delegate?.newAlarmCreated(createdAlarm: alarm)
             
-        
         }
     }
     

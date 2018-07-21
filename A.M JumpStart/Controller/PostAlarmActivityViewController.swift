@@ -50,6 +50,7 @@ class PostAlarmActivityViewController: UIViewController {
         guard let smartAlarm = smartAlarm else { fatalError() }
         let destinationVC = segue.destination as! ActivityDurationViewController
         destinationVC.activitiesToSetUp = Array(smartAlarm.activites)
+        destinationVC.smartAlarm = smartAlarm
     }
     @IBAction func previousPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)

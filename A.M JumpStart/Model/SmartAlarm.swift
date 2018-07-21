@@ -12,16 +12,25 @@ import RealmSwift
 
 class SmartAlarm: SystemAlarm{
     
-    @objc dynamic var alarmName : String = ""
-    @objc dynamic var destination : Destination?
-    @objc dynamic var origin : Destination?
+//    @objc dynamic var alarmName : String = ""
+    var destination = Destination()
+    var origin = Destination()
     var activites = List<TravelTask>()
     @objc dynamic var departureTime: Date = Date()
+    @objc dynamic var timeToDestination = 0
+    @objc dynamic var totalTimeForPreTravel = 0{
+        willSet{
+            totalTimeNeededToTravel = newValue + timeToDestination
+        }
+    }
+    @objc dynamic var totalTimeNeededToTravel = 0
     @objc dynamic var desiredArrivalTime: Date = Date()
+    var delegate : SmartAlarmCreatedDelegate?
     
     convenience init(title: String) {
-        self.init(title: title)
-        self.alarmName  = title
+        self.init()
+//        super.init(title: title)
+        super.alarmTitle  = title
         
     }
     

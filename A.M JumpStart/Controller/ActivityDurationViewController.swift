@@ -8,6 +8,7 @@
 
 import UIKit
 import FoldingCell
+import TimeIntervals
 
 fileprivate struct C {
     struct CellHeight {
@@ -17,16 +18,29 @@ fileprivate struct C {
 }
 
 class ActivityDurationViewController: UIViewController {
-    @IBOutlet weak var tableView: UITableView!
-    var activitiesToSetUp : Array<TravelTask>?
-    var cellHeights = (0..<2).map { _ in C.CellHeight.close }
     
-
+    // MARK: - Variables
+    ////////////////////////////////////////////////////
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var activityDurationMap = [String: Int]()
+    var activitiesToSetUp : Array<TravelTask>?{
+        willSet{
+            _ = newValue?.map({ (task) in
+                activityDurationMap["\(task.title)"] = task.taskDuration
+            })
+        }
+    }
+    var cellHeights = (0..<2).map { _ in C.CellHeight.close }
+    var openCells = Set<ActivityDurationCell>()
     var timeSum = 0
+    var smartAlarm: SmartAlarm?
+    ////////////////////////////////////////////////////
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         let nib = UINib(nibName: "Foldable", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "foldableCell")
@@ -34,30 +48,58 @@ class ActivityDurationViewController: UIViewController {
         if let numCells = activitiesToSetUp{
             cellHeights = (0..<numCells.count).map { _ in C.CellHeight.close }
         }
-            tableView.separatorStyle = .none
-
+        tableView.separatorStyle = .none
+        
+        print(activityDurationMap.count)
+        
     }
     
-
-
-    // MARK: - Navigation
-
-
-
-    @IBAction func nextBtnPressed(_ sender: Any) {
-        var sum = 0.0
-        let cells = tableView.visibleCells as! [ActivityDurationCell]
-        for cell in cells{
-            sum += cell.durationTime.value
+    override func viewWillDisappear(_ animated: Bool) {
+        if let smartAlarm = smartAlarm{
+            smartAlarm.registerAlarm(for: smartAlarm.alarmTime, isrepeated: false)
+            smartAlarm.delegate?.newSmartCreated(newSmartAlarm: smartAlarm)
         }
-        print("Total time needed: \(sum)")
+    }
+    
+    
+    // MARK: - Navigation
+    //////////////////////////////////////////////////
+    
+    @IBAction func nextBtnPressed(_ sender: Any) {
         
+        getValueFromAllOpenCells()
+        var totalTimeNeededPreTravel = 0
+        _ = activityDurationMap.mapValues { (mins) in
+            print(mins)
+            totalTimeNeededPreTravel += mins
+        }
+        guard let smartAlarm = smartAlarm else { fatalError() }
+        let interval = totalTimeNeededPreTravel.minutes.inSeconds
+         smartAlarm.totalTimeForPreTravel = Int(interval.value)
+        smartAlarm.alarmTime = smartAlarm.desiredArrivalTime - smartAlarm.totalTimeNeededToTravel.seconds
+//        print("Total time needed: \(smartAlarm.totalTimeNeededToTravel)")
+//        print("Alarm Time is \(smartAlarm.alarmTime)")
+//        print("Desired Arrival Time \(smartAlarm.desiredArrivalTime)")
+        
+        performSegue(withIdentifier: "backToHome", sender: self)
     }
     
     @IBAction func backBtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
         
     }
+    ////////////////////////////////////////////////////
+    
+    
+    // MARK: - Cell Clean Up
+    ////////////////////////////////////////////////////
+    func getValueFromAllOpenCells(){
+        _ = openCells.map { (cell)  in
+            self.activityDurationMap[(cell.task?.title)!] = Int(cell.durationTime.value)
+        }
+    }
+    ////////////////////////////////////////////////////
+    
     
 }
 
@@ -65,7 +107,7 @@ extension ActivityDurationViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let activities = activitiesToSetUp{
-          return activities.count
+            return activities.count
         }else{
             return 1
         }
@@ -78,22 +120,20 @@ extension ActivityDurationViewController: UITableViewDelegate, UITableViewDataSo
         cell.durationsForExpandedState = durations
         cell.durationsForCollapsedState = durations
         
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let durationCell = cell as! ActivityDurationCell
         durationCell.task = activitiesToSetUp?[indexPath.row]
-//        _ = durationCell.activityLabels.map({$0.text = activitiesToSetUp?[indexPath.row].title})
         durationCell.task?.taskDuration = Int(durationCell.durationTime.value)
         
         _ = durationCell.durationLabels.map({$0.text = "\(durationCell.task?.taskDuration ?? 99)"})
         
-//        durationCell.minutesLabel.text = "\(durationCell.task?.taskDuration ?? 99)"
         
         timeSum += Int(durationCell.durationTime.value)
         
-                
         if case let cell as FoldingCell = cell {
             if cellHeights[indexPath.row] == C.CellHeight.close {
                 cell.unfold(false, animated: false, completion:nil)
@@ -101,11 +141,8 @@ extension ActivityDurationViewController: UITableViewDelegate, UITableViewDataSo
                 cell.unfold(true, animated: false, completion: nil)
             }
         }
-
+        
     }
-    
-    
-
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeights[indexPath.row]
@@ -114,7 +151,7 @@ extension ActivityDurationViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! ActivityDurationCell
         cell.task?.taskDuration = Int(cell.durationTime.value)
-         _ = cell.durationLabels.map({$0.text = "\(cell.task?.taskDuration ?? 99)"})
+        _ = cell.durationLabels.map({$0.text = "\(cell.task?.taskDuration ?? 99)"})
         
         let duration = 0.5
         if cellHeights[indexPath.row] == C.CellHeight.close { // open cell
@@ -123,23 +160,32 @@ extension ActivityDurationViewController: UITableViewDelegate, UITableViewDataSo
                 cell.foregroundView.alpha = 0.0
                 cell.containerView.alpha = 1.0
             }
-           
+            
         } else {// close cell
             cellHeights[indexPath.row] = C.CellHeight.close
             UIView.animate(withDuration: duration) {
                 cell.containerView.alpha = 0.0
                 cell.foregroundView.alpha = 1.0
+                
             }
-
-
+            activityDurationMap.updateValue((cell.task?.taskDuration)!, forKey: (cell.task?.title)!)
+            
+        }
+        
+        if( cell.containerView.alpha == 1.0 ){
+            openCells.insert(cell)
+        }else{
+            openCells.remove(cell)
         }
         
         UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: {
             tableView.beginUpdates()
             tableView.endUpdates()
         }, completion: nil)
-
+        
     }
+    
+    
     
 }
 

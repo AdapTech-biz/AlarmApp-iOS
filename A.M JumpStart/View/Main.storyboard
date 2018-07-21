@@ -762,7 +762,7 @@
                                                     <action selector="backBtnPressed:" destination="xd4-GD-LYE" eventType="touchUpInside" id="Thq-3E-xLC"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wS4-6R-MDR">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wS4-6R-MDR" userLabel="Finish!">
                                                 <rect key="frame" x="207" y="0.0" width="207" height="71"/>
                                                 <color key="backgroundColor" red="0.53409618140000004" green="0.59629547599999999" blue="0.81492191550000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
@@ -809,9 +809,11 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="Ppj-6h-fia" id="Y7N-wB-Vmg"/>
+                        <segue destination="2aA-gp-6PL" kind="unwind" identifier="backToHome" unwindAction="unwindToHomeWithSegue:" id="499-Ep-fVO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xq6-dK-D40" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="2aA-gp-6PL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5338" y="-24"/>
         </scene>
@@ -908,6 +910,6 @@
         <image name="sunrise" width="99" height="53"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Lj6-rL-FL0"/>
+        <segue reference="x8M-zK-QFg"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -14,6 +14,7 @@ PODS:
   - RealmSwift (3.7.4):
     - Realm (= 3.7.4)
   - SCLAlertView (0.8)
+  - SnapKit (4.0.0)
   - SwiftyJSON (4.1.0)
   - TextFieldEffects (1.4.0)
   - TimeIntervals (1.0.0)
@@ -26,6 +27,7 @@ DEPENDENCIES:
   - PopupDialog (~> 0.7)
   - RealmSwift
   - SCLAlertView
+  - SnapKit (~> 4.0.0)
   - SwiftyJSON
   - TextFieldEffects
   - TimeIntervals (~> 1.0.0)
@@ -40,6 +42,7 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SCLAlertView
+    - SnapKit
     - SwiftyJSON
     - TextFieldEffects
     - TimeIntervals
@@ -63,10 +66,11 @@ SPEC CHECKSUMS:
   Realm: a469bb59e33f9926102ccaea4349822c53b9117e
   RealmSwift: a45861b21c180f5cf0f122144b9759fa8dde3e9e
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
   TimeIntervals: 1ae58fc906d35311c5ca84a689c86c69c2209575
 
-PODFILE CHECKSUM: 0c35dde602fa9d48654727c398d4f26da72a04c2
+PODFILE CHECKSUM: 1b6cefc9d15811b621994b3a2e97546c1f66ef0c
 
 COCOAPODS: 1.5.2

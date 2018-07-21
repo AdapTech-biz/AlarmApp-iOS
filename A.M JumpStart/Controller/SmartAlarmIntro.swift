@@ -25,7 +25,7 @@ class SmartAlarmIntro: UIViewController {
         }
     }
     
-    private var smartAlarm: SmartAlarm = SmartAlarm(title: "Alarm")
+    var smartAlarm: SmartAlarm = SmartAlarm(title: "Alarm")
     
      let states = UIPickerView()
     
@@ -138,6 +138,7 @@ class SmartAlarmIntro: UIViewController {
                 let json = JSON(value)
                 print("JSON: \(json)")
                 let travelTimeInSec = json["rows"][0]["elements"][0]["duration"]["value"].intValue
+                self.smartAlarm.timeToDestination = travelTimeInSec
                 let alarmTime = self.smartAlarm.desiredArrivalTime - travelTimeInSec.seconds
                 
                 print("Set you alarm for \(alarmTime) to arrive by \(self.smartAlarm.desiredArrivalTime )")
@@ -154,10 +155,12 @@ class SmartAlarmIntro: UIViewController {
     @IBAction func continuePressed(_ sender: Any) {
         
         smartAlarm.alarmTitle = titleTextField.text!
-        smartAlarm.destination?.address = addressTextField.text!
-        smartAlarm.destination?.city = cityTextField.text!
-        smartAlarm.destination?.state = stateTextField.text!
+        smartAlarm.destination.address = addressTextField.text!
+        smartAlarm.destination.city = cityTextField.text!
+        smartAlarm.destination.state = stateTextField.text!
         smartAlarm.desiredArrivalTime = desiredTimePicker.date
+        
+        print(smartAlarm.destination.address)
         
         // Prepare the popup assets
         let title = "Travel From"
@@ -268,26 +271,24 @@ extension SmartAlarmIntro: CLLocationManagerDelegate{
         let location = locations[locations.count - 1]   //fetches the last item in array -- most up to date location
         if location.horizontalAccuracy > 0 {    //checks the location radius to ensure it is valid--  video (sec. 13 lecture 143 @ 7:50)
             manager.stopUpdatingLocation()  //stops the GPS gathering
-            //            print ("longitude = \(location.coordinate.longitude), latitude = \(location.coordinate.latitude)")
             
             let latitude = String(location.coordinate.latitude)
             let longitude = String(location.coordinate.longitude)
             
             print("Lat \(latitude), Long \(longitude)")
-            //            let params : [String: String] = ["lat" : latitude, "lon" : longitude, "appid" : APP_ID]
-            //            getWeatherData(url: WEATHER_URL, parameters: params)
-            smartAlarm.origin?.lat = latitude
-            smartAlarm.origin?.lon = longitude
+
+            smartAlarm.origin.lat = latitude
+            smartAlarm.origin.lon = longitude
             
             
             
-            let destination = "\(smartAlarm.destination?.address ?? "")+\(smartAlarm.destination?.city ?? "")+\(smartAlarm.destination?.state ?? "")"
-            let origin = "\(smartAlarm.origin?.lat ?? ""),\(smartAlarm.origin?.lon ?? "")"
+            let destination = "\(smartAlarm.destination.address )+\(smartAlarm.destination.city )+\(smartAlarm.destination.state )"
+            let origin = "\(smartAlarm.origin.lat ),\(smartAlarm.origin.lon )"
             
             let parameters : Parameters = ["origins" : origin,
                                            "destinations" : destination,
                                            "key" : API_KEY]
-            
+           
             getTravelInfo(parameters: parameters)
 
             

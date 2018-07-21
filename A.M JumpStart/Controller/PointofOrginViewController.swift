@@ -11,6 +11,7 @@ import SCLAlertView
 import TextFieldEffects
 import Alamofire
 import SwiftyJSON
+import TimeIntervals
 
 class PointofOrginViewController: UIViewController {
     
@@ -93,13 +94,15 @@ class PointofOrginViewController: UIViewController {
 
     @IBAction func continuePressed(_ sender: Any) {
         
-        smartAlarm?.origin?.address = addressTextField.text!
-        smartAlarm?.origin?.city = cityTextField.text!
-        smartAlarm?.origin?.state = stateTextField.text!
+       
         guard let smartAlarm = smartAlarm else {fatalError()}
+        smartAlarm.origin.address = addressTextField.text!
+        smartAlarm.origin.city = cityTextField.text!
+        smartAlarm.origin.state = stateTextField.text!
         
-        let origin = "\(smartAlarm.origin?.address ?? "")+\(smartAlarm.origin?.city ?? "")+\(smartAlarm.origin?.state ?? "")"
-        let destination = "\(smartAlarm.destination?.address ?? "")+\(smartAlarm.destination?.city ?? "")+\(smartAlarm.destination?.state ?? "")"
+        let origin = "\(smartAlarm.origin.address )+\(smartAlarm.origin.city)+\(smartAlarm.origin.state)"
+        let destination = "\(smartAlarm.destination.address)+\(smartAlarm.destination.city)+\(smartAlarm.destination.state)"
+
         
         let parameters : Parameters = ["origins" : origin,
                                        "destinations" : destination,
@@ -112,6 +115,7 @@ class PointofOrginViewController: UIViewController {
     func getTravelInfo(parameters: Parameters){
         
         let url = "https://maps.googleapis.com/maps/api/distancematrix/json"
+        guard let smartAlarm = smartAlarm else { fatalError() }
         
         Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default).validate().responseJSON { (response) in
             
@@ -119,12 +123,16 @@ class PointofOrginViewController: UIViewController {
             case .success(let value):
                 let json = JSON(value)
                 print("JSON: \(json)")
-                print(json["rows"][0]["elements"][0]["duration"]["value"])
+                let travelTimeInSec = json["rows"][0]["elements"][0]["duration"]["value"].intValue
+                smartAlarm.timeToDestination = travelTimeInSec
+                let alarmTime = smartAlarm.desiredArrivalTime - travelTimeInSec.seconds
+                
+                print("Set you alarm for \(alarmTime) to arrive by \(smartAlarm.desiredArrivalTime )")
             case .failure(let error):
                 print(error)
                 
             }
-            
+            self.performSegue(withIdentifier: "goToRoutineSetup", sender: self)
         }
     }
     
