@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import SwipeCellKit
 
 
-class AlarmCell: UITableViewCell {
+class AlarmCell: SwipeTableViewCell {
     @IBOutlet weak var minuteLabel: UILabel!
     @IBOutlet weak var hourLabel: UILabel!
     
@@ -21,7 +22,7 @@ class AlarmCell: UITableViewCell {
     @IBOutlet weak var thursdayLabel: UILabel!
     @IBOutlet weak var fridayLabel: UILabel!
     @IBOutlet weak var saturdayLabel: UILabel!
-    
+    var alarmModel : SystemAlarm?
     
     override func awakeFromNib() {
         super.awakeFromNib()

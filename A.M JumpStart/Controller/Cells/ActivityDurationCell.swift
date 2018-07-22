@@ -11,6 +11,7 @@ import GMStepper
 import FoldingCell
 
 
+
 protocol ActivityDurationDelegate {
     func timeUpdated(time: Double)
 }

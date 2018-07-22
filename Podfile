@@ -17,4 +17,5 @@ target 'A.M JumpStart' do
     pod 'TimeIntervals', '~> 1.0.0'
     pod 'RealmSwift'
      pod 'SnapKit', '~> 4.0.0'
+     pod 'SwipeCellKit', :git => 'https://github.com/SwipeCellKit/SwipeCellKit.git', :branch => 'develop'
 end

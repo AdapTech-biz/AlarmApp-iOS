@@ -54,7 +54,7 @@ class SystemAlarm: Object{
         content.title = "Time to get up!"
         content.body = "The alarm you set is on!"
         content.sound = UNNotificationSound(named: "analog-watch-alarm_daniel-simion.wav")
-        content.categoryIdentifier = "SleeperAlarm"
+        content.categoryIdentifier = alarmTitle
         
     }
 
@@ -128,8 +128,6 @@ class SystemAlarm: Object{
         components.month = Calendar.current.component(.month, from: Date())
         components.timeZone = .current
         
-//        guard let weeklySechedule = weeklySchedule else { fatalError() }
-        
         if (!weeklySchedule.isEmpty){
             for day in weeklySchedule{
                 
@@ -157,7 +155,7 @@ class SystemAlarm: Object{
     }
     
    public func registerAlarm(for date:  Date, isrepeated: Bool)  {
-        
+        print(date)
         //get user access to user Notifcation center
         getNotificationAccess()
    
@@ -180,8 +178,8 @@ class SystemAlarm: Object{
         
     }
     
-    func cancelAllPendingAlarms()  {
-        center.removeAllPendingNotificationRequests()
+    func cancelFutureAlarms()  {
+        center.removePendingNotificationRequests(withIdentifiers: [alarmTitle])
     }
 
     

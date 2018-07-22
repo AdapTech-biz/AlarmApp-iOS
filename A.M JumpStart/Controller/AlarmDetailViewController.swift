@@ -10,21 +10,42 @@ import UIKit
 import SnapKit
 
 class AlarmDetailViewController: UIViewController {
-    let alarmDetailView = AlarmDetailView()
+    
+   lazy var alarmDetailView = AlarmDetailView()
+    var alarmToDisplay : SystemAlarm?
+    var isSmartAlarm = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+//        alarmDetailView.tripButton.addTarget(self, action: #selector(displayTravelDetails), for: .touchUpInside)
+//        alarmDetailView.backArrow.addTarget(self, action: #selector(backHomePressed), for: .touchUpInside)
+
+        
+        
+        // Do any additional setup after loading the view.
+    }
+    override func viewWillLayoutSubviews() {
         view.addSubview(alarmDetailView)
         alarmDetailView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        // Do any additional setup after loading the view.
+        alarmDetailView.alarmTitleLabel.text = alarmToDisplay?.alarmTitle
+        alarmDetailView.alarmTimeLabel.text = "\(alarmToDisplay?.alarmHour ?? 99):\(alarmToDisplay?.alarmMin ?? 99)"
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+//    @objc func displayTravelDetails(sender: UIButton){
+//        alarmDetailView.moveInfoElementsToHeader(buttonPressed: sender)
+//    }
+//
+//    @objc func backHomePressed(sender: UIButton){
+//        print("Pressed")
+//    }
 
     /*
     // MARK: - Navigation

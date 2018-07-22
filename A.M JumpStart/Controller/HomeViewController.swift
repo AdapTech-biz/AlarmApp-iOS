@@ -12,6 +12,7 @@ import AVFoundation
 import PopupDialog
 import ChameleonFramework
 import RealmSwift
+import SwipeCellKit
 
 class HomeViewController: UIViewController{
     
@@ -47,14 +48,18 @@ class HomeViewController: UIViewController{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToOldFashion"{
+        switch segue.identifier {
+        case "goToOldFashion":
             let destinationVC = segue.destination as! OldFashionViewController
             destinationVC.homeViewController = self
             destinationVC.delegate = self
-        }else{
+        case "goToSmartAlarm":
             let destinationVC = segue.destination as! SmartAlarmIntro
             destinationVC.smartAlarm.delegate = self
+        default:
+            print("Nothing to display")
         }
+       
     }
     
     @IBAction func unwindToHome(segue:UIStoryboardSegue) { }
@@ -108,9 +113,34 @@ class HomeViewController: UIViewController{
         
     }
     
+    func updateModel(at indexPath: IndexPath){
+        var isSmart = false
+        switch indexPath.section {
+        case 0:
+            isSmart = false
+        default:
+            isSmart = true
+        }
+                do{
+                    let alarm = isSmart ? createdSmartAlarms[indexPath.row] : createdClassicAlarms[indexPath.row]
+                        try realm.write {
+                            alarm.cancelFutureAlarms()
+                            realm.delete(alarm)
+                        }
+
+                }catch {
+                    print("Error deleting alarm \(error)")
+                }
+        
+        tableView.performBatchUpdates({
+            var paths = Array<IndexPath>()
+            paths.append(indexPath)
+            tableView.deleteRows(at: paths, with: UITableViewRowAnimation.fade)
+        }, completion: nil)
     
     ///////////////////////////////////////////////////////////////////
 
+    }
 }
 
 
@@ -166,46 +196,54 @@ extension HomeViewController: UNUserNotificationCenterDelegate, UITableViewDeleg
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "alarmCell", for: indexPath) as! AlarmCell
         cell.accessoryType = .disclosureIndicator
+        cell.delegate = self
+
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let alarmCell = cell as! AlarmCell
+        
         
         switch indexPath.section {
         case 0:
             if let currentAlarm = createdClassicAlarms?[indexPath.row]{
-                cell.alarmTitle.text = currentAlarm.alarmTitle
-                cell.hourLabel.text = "\(currentAlarm.alarmHour)"
-                cell.minuteLabel.text = String(format: "%02d", currentAlarm.alarmMin)
+                alarmCell.alarmModel = currentAlarm
+                alarmCell.alarmTitle.text = currentAlarm.alarmTitle
+                alarmCell.hourLabel.text = "\(currentAlarm.alarmHour)"
+                alarmCell.minuteLabel.text = String(format: "%02d", currentAlarm.alarmMin)
                 
                 
                 for day in currentAlarm.weeklySchedule{
                     switch day{
-                    case 1: cell.sundayLabel.textColor = UIColor.flatMint
-                    case 2: cell.mondayLabel.textColor = UIColor.flatMint
-                    case 3: cell.tuesdayLabel.textColor = UIColor.flatMint
-                    case 4: cell.wednesdayLabel.textColor = UIColor.flatMint
-                    case 5: cell.thursdayLabel.textColor = UIColor.flatMint
-                    case 6: cell.fridayLabel.textColor = UIColor.flatMint
-                    default: cell.saturdayLabel.textColor = UIColor.flatMint
+                    case 1: alarmCell.sundayLabel.textColor = UIColor.flatMint
+                    case 2: alarmCell.mondayLabel.textColor = UIColor.flatMint
+                    case 3: alarmCell.tuesdayLabel.textColor = UIColor.flatMint
+                    case 4: alarmCell.wednesdayLabel.textColor = UIColor.flatMint
+                    case 5: alarmCell.thursdayLabel.textColor = UIColor.flatMint
+                    case 6: alarmCell.fridayLabel.textColor = UIColor.flatMint
+                    default: alarmCell.saturdayLabel.textColor = UIColor.flatMint
                     }
                 }
             }else{
-                cell.alarmTitle.text = "No Alarms To Display"
-                cell.hourLabel.text = ""
-                cell.minuteLabel.text = ""
+                alarmCell.alarmTitle.text = "No Alarms To Display"
+                alarmCell.hourLabel.text = ""
+                alarmCell.minuteLabel.text = ""
             }
         default:
             if let smartAlarm = createdSmartAlarms?[indexPath.row]{
-                cell.alarmTitle.text = smartAlarm.alarmTitle
-                cell.hourLabel.text = "\(smartAlarm.alarmHour)"
-                cell.minuteLabel.text = String(format: "%02d", smartAlarm.alarmMin)
+                alarmCell.alarmModel = smartAlarm
+                alarmCell.alarmTitle.text = smartAlarm.alarmTitle
+                alarmCell.hourLabel.text = "\(smartAlarm.alarmHour)"
+                alarmCell.minuteLabel.text = String(format: "%02d", smartAlarm.alarmMin)
             }else{
-                cell.alarmTitle.text = "No Alarms To Display"
-                cell.hourLabel.text = ""
-                cell.minuteLabel.text = ""
+                alarmCell.alarmTitle.text = "No Alarms To Display"
+                alarmCell.hourLabel.text = ""
+                alarmCell.minuteLabel.text = ""
             }
         }
-       
-
-
-        return cell
+        
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -216,8 +254,7 @@ extension HomeViewController: UNUserNotificationCenterDelegate, UITableViewDeleg
         default:
             return createdSmartAlarms?.count ?? 1
         }
-    
-//    return createdClassicAlarms?.count ?? 1
+
         
     }
     
@@ -226,8 +263,17 @@ extension HomeViewController: UNUserNotificationCenterDelegate, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        present(AlarmDetailViewController(), animated: true, completion: nil)
+        let alarmDetailVC = AlarmDetailViewController()
+        switch indexPath.section {
+        case 0:
+          alarmDetailVC.alarmToDisplay =  createdClassicAlarms[indexPath.row]
+        default:
+             alarmDetailVC.alarmToDisplay =  createdSmartAlarms[indexPath.row]
+        }
+        present(alarmDetailVC, animated: true, completion: nil)
     }
+    
+    
     //////////////////////////////////////////////////////////////////
     
     //MARK: AlarmCreatedDelegate Method
@@ -253,7 +299,19 @@ extension HomeViewController: UNUserNotificationCenterDelegate, UITableViewDeleg
     
 }
 
-extension HomeViewController: SmartAlarmCreatedDelegate{
+extension HomeViewController: SmartAlarmCreatedDelegate, SwipeTableViewCellDelegate{
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        
+        guard orientation == .right else { return nil }
+        
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            // handle action by updating model with deletion
+            self.updateModel(at: indexPath)
+        }
+        
+        return [deleteAction]
+    }
+    
     func newSmartCreated(newSmartAlarm: SmartAlarm) {
         //save with relm
         do{
