@@ -18,4 +18,6 @@ target 'A.M JumpStart' do
     pod 'RealmSwift'
      pod 'SnapKit', '~> 4.0.0'
      pod 'SwipeCellKit', :git => 'https://github.com/SwipeCellKit/SwipeCellKit.git', :branch => 'develop'
+     pod 'RxSwift',    '~> 4.0'
+     pod 'RxCocoa',    '~> 4.0'
 end

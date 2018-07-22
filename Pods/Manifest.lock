@@ -13,6 +13,9 @@ PODS:
   - Realm/Headers (3.7.4)
   - RealmSwift (3.7.4):
     - Realm (= 3.7.4)
+  - RxCocoa (4.2.0):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.2.0)
   - SCLAlertView (0.8)
   - SnapKit (4.0.0)
   - SwiftyJSON (4.1.0)
@@ -27,6 +30,8 @@ DEPENDENCIES:
   - GMStepper
   - PopupDialog (~> 0.7)
   - RealmSwift
+  - RxCocoa (~> 4.0)
+  - RxSwift (~> 4.0)
   - SCLAlertView
   - SnapKit (~> 4.0.0)
   - SwiftyJSON
@@ -43,6 +48,8 @@ SPEC REPOS:
     - PopupDialog
     - Realm
     - RealmSwift
+    - RxCocoa
+    - RxSwift
     - SCLAlertView
     - SnapKit
     - SwiftyJSON
@@ -73,6 +80,8 @@ SPEC CHECKSUMS:
   PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
   Realm: a469bb59e33f9926102ccaea4349822c53b9117e
   RealmSwift: a45861b21c180f5cf0f122144b9759fa8dde3e9e
+  RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
+  RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
@@ -80,6 +89,6 @@ SPEC CHECKSUMS:
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
   TimeIntervals: 1ae58fc906d35311c5ca84a689c86c69c2209575
 
-PODFILE CHECKSUM: b09616baa444e048e58af782196b67fd061099ad
+PODFILE CHECKSUM: 7920b75122aba8b9bf7d93ede07e9a25368b5911
 
 COCOAPODS: 1.5.2
