@@ -9,6 +9,7 @@
 import UIKit
 import FoldingCell
 import TimeIntervals
+import RealmSwift
 
 fileprivate struct C {
     struct CellHeight {
@@ -36,6 +37,7 @@ class ActivityDurationViewController: UIViewController {
     var openCells = Set<ActivityDurationCell>()
     var timeSum = 0
     var smartAlarm: SmartAlarm?
+    let realm = try! Realm()
     ////////////////////////////////////////////////////
     
     override func viewDidLoad() {
@@ -56,8 +58,16 @@ class ActivityDurationViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         if let smartAlarm = smartAlarm{
-            smartAlarm.registerAlarm(for: smartAlarm.alarmTime, isrepeated: false)
-            smartAlarm.delegate?.newSmartCreated(newSmartAlarm: smartAlarm)
+            smartAlarm.systemAlarmComponent?.registerAlarm(for: smartAlarm.alarmTime, isrepeated: false)
+            
+            do{
+                try realm.write {
+                    realm.add(smartAlarm)
+                    print("Saved alarm \(smartAlarm.title)")
+                }
+            }catch{
+                print("Realm error \(error)")
+            }
         }
     }
     

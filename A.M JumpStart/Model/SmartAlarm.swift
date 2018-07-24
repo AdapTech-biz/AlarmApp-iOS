@@ -8,14 +8,15 @@
 
 import Foundation
 import RealmSwift
+import RxCocoa
+import RxSwift
 
 
-class SmartAlarm: SystemAlarm{
+class SmartAlarm: BasicAlarm{
     
-//    @objc dynamic var alarmName : String = ""
     var destination = Destination()
     var origin = Destination()
-    var activites = List<TravelTask>()
+    var activites : Variable<[TravelTask]> = Variable([])
     @objc dynamic var departureTime: Date = Date()
     @objc dynamic var timeToDestination = 0
     @objc dynamic var totalTimeForPreTravel = 0{
@@ -25,12 +26,11 @@ class SmartAlarm: SystemAlarm{
     }
     @objc dynamic var totalTimeNeededToTravel = 0
     @objc dynamic var desiredArrivalTime: Date = Date()
-    var delegate : SmartAlarmCreatedDelegate?
+//    var delegate : SmartAlarmCreatedDelegate?
     
     convenience init(title: String) {
         self.init()
-//        super.init(title: title)
-        super.alarmTitle  = title
+        self.title = title
         
     }
     

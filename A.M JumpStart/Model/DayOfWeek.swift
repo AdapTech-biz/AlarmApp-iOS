@@ -7,20 +7,20 @@
 //
 
 import Foundation
+import RealmSwift
 
 
-class DayofWeek {
+class DayofWeek: Object {
     
-    let day : String
-    var selected : Bool = false
-    let dayEnum : DaysofWeek
-    
-    
-    init(day: DaysofWeek) {
-        self.day = day.description
-        self.dayEnum = day
-    }
-    
+   @objc dynamic var day : String = ""
+    @objc dynamic var selected : Bool = false
+    @objc dynamic var dayToInt : Int = -1
+
+    var parentAlarm = LinkingObjects(fromType: BasicAlarm.self, property: "weeklySchedule") //retro relationship to Category -- looks up items variable
    
-    
+    convenience init (day: DaysofWeek){
+        self.init()
+        self.day = day.description
+        self.dayToInt = day.dateComponentValue
+    }
 }

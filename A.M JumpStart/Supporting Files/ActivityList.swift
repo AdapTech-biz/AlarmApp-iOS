@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import RxSwift
 
 struct ActivityList {
     
-   static var activity = ["Brush Teeth", "Get Dressed", "Drink coffee",
+    static var activity : Variable<[String]> = Variable(["Brush Teeth", "Get Dressed", "Drink coffee",
                     "Breakfast", "Floss", "Wash face", "Shower",
                     "Excerise", "Wake up kids", "Check emails",
                     "Social Media", "Excerise", "Wake up kids", "Check emails",
@@ -18,5 +19,5 @@ struct ActivityList {
                     "Excerise", "Wake up kids", "Check emails",
                     "Excerise", "Wake up kids", "Check emails",
                     "Excerise", "Wake up kids", "Check emails",
-                    "Excerise", "Wake up kids", "Check emails",]
+                    "Excerise", "Wake up kids", "Check emails",])
 }

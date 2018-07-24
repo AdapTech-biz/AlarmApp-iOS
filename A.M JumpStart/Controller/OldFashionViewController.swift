@@ -11,6 +11,7 @@ import UserNotifications
 import AVFoundation
 import ChameleonFramework
 import SCLAlertView
+import RealmSwift
 
 //protocol AlarmCreatedDelegate {
 //    func newAlarmCreated(createdAlarm: SystemAlarm)
@@ -40,8 +41,8 @@ class OldFashionViewController: UIViewController {
     //MARK: Class Variables
     /////////////////////////////////////////////////////////////////
 
-    var delegate : ClassicAlarmCreatedDelegate?
-    var selectedDays = Set<DaysofWeek>()
+//    var delegate : ClassicAlarmCreatedDelegate?
+    var selectedDays = Set<DayofWeek>()
     var colorArray = ColorSchemeOf(ColorScheme.complementary, color: FlatBlue(), isFlatScheme: true)
     var homeViewController : HomeViewController?
     let days:[DayofWeek] = [
@@ -53,7 +54,9 @@ class OldFashionViewController: UIViewController {
         DayofWeek(day: DaysofWeek.Friday),
         DayofWeek(day: DaysofWeek.Saturday)
     ]
-    var alarm : SystemAlarm?
+    var alarm : BasicAlarm?
+    
+    let realm = try! Realm()
     /////////////////////////////////////////////////////////////////
 
     
@@ -73,9 +76,19 @@ class OldFashionViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         if let alarm = alarm{
-            self.delegate?.newAlarmCreated(createdAlarm: alarm)
-            
+//            self.delegate?.newAlarmCreated(createdAlarm: alarm)
+            do{
+                try realm.write {
+                    realm.add(alarm)
+                    print("Saved alarm \(alarm.title)")
+                }
+            }catch{
+                print("Realm error \(error)")
+            }
+
         }
+        
+       
     }
     
     //MARK: IBAction Button Press
@@ -93,13 +106,14 @@ class OldFashionViewController: UIViewController {
         let text = alert.addTextField("Label for Alarm...")
         alert.addButton("Create") {
             
-            self.alarm = SystemAlarm(title: text.text!)
+            self.alarm = BasicAlarm()
+            self.alarm?.title = text.text!
             guard let alarm = self.alarm else {fatalError()}
-            alarm.center.delegate = self.homeViewController
+            alarm.systemAlarmComponent?.center.delegate = self.homeViewController
             alarm.isRepeatable = self.reoccurringSwitch.isOn
 
-            _ = self.selectedDays.map {alarm.weeklySchedule.insert($0.dateComponentValue)}
-            alarm.createAlarm(from: self.timePicker)
+            _ = self.selectedDays.map {alarm.weeklySchedule.append($0)}
+            alarm.systemAlarmComponent?.createAlarm(from: self.timePicker)
             self.dismiss(animated: true, completion: nil)
             
         }
@@ -147,9 +161,9 @@ extension OldFashionViewController: UITableViewDelegate, UITableViewDataSource{
         selectedDay.selected = !selectedDay.selected
        
         if (selectedDay.selected){
-            selectedDays.insert(selectedDay.dayEnum)
+            selectedDays.insert(selectedDay)
         }else{
-           selectedDays.remove(selectedDay.dayEnum)
+           selectedDays.remove(selectedDay)
         }
         tableView.reloadData()
     }

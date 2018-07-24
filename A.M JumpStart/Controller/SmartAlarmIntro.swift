@@ -154,7 +154,7 @@ class SmartAlarmIntro: UIViewController {
     
     @IBAction func continuePressed(_ sender: Any) {
         
-        smartAlarm.alarmTitle = titleTextField.text!
+        smartAlarm.title = titleTextField.text!
         smartAlarm.destination.address = addressTextField.text!
         smartAlarm.destination.city = cityTextField.text!
         smartAlarm.destination.state = stateTextField.text!

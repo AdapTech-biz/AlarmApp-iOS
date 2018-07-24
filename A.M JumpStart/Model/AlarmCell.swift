@@ -22,7 +22,7 @@ class AlarmCell: SwipeTableViewCell {
     @IBOutlet weak var thursdayLabel: UILabel!
     @IBOutlet weak var fridayLabel: UILabel!
     @IBOutlet weak var saturdayLabel: UILabel!
-    var alarmModel : SystemAlarm?
+    var alarmModel : BasicAlarm?
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -10,9 +10,13 @@ import Foundation
 import UIKit
 import SnapKit
 import ChameleonFramework
+import RxSwift
+import RxCocoa
+import RxGesture
 
 class AlarmDetailView: UIView{
     let screenSize = UIScreen.main.bounds
+    let disposeBag = DisposeBag()
     
     let gradientView = UIImageView()
     let imageViewHolder = UIView()
@@ -33,6 +37,8 @@ class AlarmDetailView: UIView{
         self.addSubview(gradientView)
         self.addSubview(imageViewHolder)
         self.addSubview(bottomView)
+        
+       
         
         gradientView.addSubview(backArrow)
         imageViewHolder.addSubview(alarmImage)
@@ -267,6 +273,7 @@ class AlarmDetailView: UIView{
     
     @objc func backHomePressed(sender: UIButton){
         print("Pressed")
+        
     }
     
     @objc func displayTravelDetails(sender: UIButton){

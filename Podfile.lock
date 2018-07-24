@@ -1,19 +1,30 @@
 PODS:
-  - Alamofire (4.7.2)
+  - Alamofire (4.7.3)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - DynamicBlurView (2.0.2)
-  - FoldingCell (3.1.1)
+  - FoldingCell (3.1.2)
   - GMStepper (2.1)
-  - PopupDialog (0.7.1):
+  - PopupDialog (0.8.0):
     - DynamicBlurView (~> 2.0)
-  - Realm (3.7.4):
-    - Realm/Headers (= 3.7.4)
-  - Realm/Headers (3.7.4)
-  - RealmSwift (3.7.4):
-    - Realm (= 3.7.4)
+  - Realm (3.7.5):
+    - Realm/Headers (= 3.7.5)
+  - Realm/Headers (3.7.5)
+  - RealmSwift (3.7.5):
+    - Realm (= 3.7.5)
   - RxCocoa (4.2.0):
+    - RxSwift (~> 4.0)
+  - RxGesture (1.2.1):
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+  - RxRealm (0.7.5):
+    - RealmSwift (~> 3.0)
+    - RxSwift (~> 4.0)
+  - RxRealmDataSources (0.2.9):
+    - RealmSwift (~> 3.0)
+    - RxCocoa (~> 4.0)
+    - RxRealm (~> 0.7.3)
     - RxSwift (~> 4.0)
   - RxSwift (4.2.0)
   - SCLAlertView (0.8)
@@ -31,6 +42,9 @@ DEPENDENCIES:
   - PopupDialog (~> 0.7)
   - RealmSwift
   - RxCocoa (~> 4.0)
+  - RxGesture
+  - RxRealm
+  - RxRealmDataSources
   - RxSwift (~> 4.0)
   - SCLAlertView
   - SnapKit (~> 4.0.0)
@@ -49,6 +63,9 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - RxCocoa
+    - RxGesture
+    - RxRealm
+    - RxRealmDataSources
     - RxSwift
     - SCLAlertView
     - SnapKit
@@ -72,15 +89,18 @@ CHECKOUT OPTIONS:
     :git: https://github.com/SwipeCellKit/SwipeCellKit.git
 
 SPEC CHECKSUMS:
-  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
-  FoldingCell: 238c33ae8d9cd655090c9c4c5ff32596cfd18c6e
+  FoldingCell: e9b02668b89af673c377cb9560edcc4c6b293a95
   GMStepper: 8994824040d57d952134e409b7724d05a1a41c18
-  PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
-  Realm: a469bb59e33f9926102ccaea4349822c53b9117e
-  RealmSwift: a45861b21c180f5cf0f122144b9759fa8dde3e9e
+  PopupDialog: 11347197b6ac3e0548ac445d40ce68d1d407e9a0
+  Realm: c286caf4dbf346ce24aad49ca76c7ce622d4a082
+  RealmSwift: 2a9281e37d6de55f66f76254d49d28aeb1b729e4
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
+  RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
+  RxRealm: a6c6c0a07cb61f34209969ca6657734edfdfff30
+  RxRealmDataSources: 798303f1d7db18d80da9e95bab9605010378040e
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
@@ -89,6 +109,6 @@ SPEC CHECKSUMS:
   TextFieldEffects: 4ee41b5216e674d55fb6ac25107bf1af7629176f
   TimeIntervals: 1ae58fc906d35311c5ca84a689c86c69c2209575
 
-PODFILE CHECKSUM: 7920b75122aba8b9bf7d93ede07e9a25368b5911
+PODFILE CHECKSUM: 962cfcaaccb6f1f5bb8f2b732d25adb2e7ea41b1
 
 COCOAPODS: 1.5.2

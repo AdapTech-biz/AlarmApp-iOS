@@ -12,7 +12,7 @@ import SnapKit
 class AlarmDetailViewController: UIViewController {
     
    lazy var alarmDetailView = AlarmDetailView()
-    var alarmToDisplay : SystemAlarm?
+    var alarmToDisplay : BasicAlarm?
     var isSmartAlarm = false
     
     override func viewDidLoad() {
@@ -20,6 +20,13 @@ class AlarmDetailViewController: UIViewController {
 //        alarmDetailView.tripButton.addTarget(self, action: #selector(displayTravelDetails), for: .touchUpInside)
 //        alarmDetailView.backArrow.addTarget(self, action: #selector(backHomePressed), for: .touchUpInside)
 
+        alarmDetailView.rx.swipeGesture(.right).when(.recognized).subscribe(onNext: { _ in
+            self.dismiss(animated: true, completion: nil)
+        }).disposed(by: alarmDetailView.disposeBag)
+        alarmDetailView.backArrow.rx.tapGesture().when(.recognized).subscribe(onNext: {_ in
+            self.dismiss(animated: true, completion: nil)
+        }).disposed(by: alarmDetailView.disposeBag)
+        
         
         
         // Do any additional setup after loading the view.
@@ -29,7 +36,7 @@ class AlarmDetailViewController: UIViewController {
         alarmDetailView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        alarmDetailView.alarmTitleLabel.text = alarmToDisplay?.alarmTitle
+        alarmDetailView.alarmTitleLabel.text = alarmToDisplay?.title
         alarmDetailView.alarmTimeLabel.text = "\(alarmToDisplay?.alarmHour ?? 99):\(alarmToDisplay?.alarmMin ?? 99)"
     }
     

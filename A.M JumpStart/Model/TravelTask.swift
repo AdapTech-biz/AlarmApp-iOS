@@ -13,7 +13,7 @@ import RealmSwift
 class TravelTask: Object{
     @objc dynamic var title: String = ""
     @objc dynamic var taskDuration: Int = 2
-    var parentAlarm = LinkingObjects(fromType: SmartAlarm.self, property: "activites")
+//    var parentAlarm = LinkingObjects(fromType: SmartAlarm.self, property: "activites")
     
     
     convenience init(title: String) {

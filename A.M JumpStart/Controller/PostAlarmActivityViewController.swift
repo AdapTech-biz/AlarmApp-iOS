@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 
 
@@ -19,21 +21,28 @@ class PostAlarmActivityViewController: UIViewController {
     public var smartAlarm: SmartAlarm?
     private let reuseIdentifier = "ActivityCell"
     private var activityList = [TravelTask]()
-//    private var selectedActivites = Array<TravelTask>()
+    var arrayOfVariables = [Variable<PostAlarmActivityCell>]()
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         // Register cell classes
         let nib = UINib(nibName: "PostAlarmActivityCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
-       
-
+        
         setupLayout()
-        activityCounter.text = "(\(smartAlarm?.activites.count ?? 99))"
+        
+        
+       smartAlarm?.activites.asObservable()
+        .subscribe({ (event) in
+            let array = event.element
+            print("Updating activity count...")
+            self.activityCounter.text = "\(array?.count ?? 0)"
+        }).disposed(by: disposeBag)
+        
         loadActivities()
     }
 
@@ -49,7 +58,7 @@ class PostAlarmActivityViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let smartAlarm = smartAlarm else { fatalError() }
         let destinationVC = segue.destination as! ActivityDurationViewController
-        destinationVC.activitiesToSetUp = Array(smartAlarm.activites)
+        destinationVC.activitiesToSetUp = smartAlarm.activites.value
         destinationVC.smartAlarm = smartAlarm
     }
     @IBAction func previousPressed(_ sender: Any) {
@@ -67,17 +76,15 @@ class PostAlarmActivityViewController: UIViewController {
     
     func loadActivities(){
         
-        for task in ActivityList.activity{
+        for task in ActivityList.activity.value{
             let newTask = TravelTask(title: task)
             activityList.append(newTask)
         }
-        
     }
 
     func removeActivity(at indextPath: IndexPath){
         
-        smartAlarm?.activites.append(activityList[indextPath.row])
-        activityCounter.text = "(\(smartAlarm?.activites.count ?? 99))"
+        smartAlarm?.activites.value.append(activityList[indextPath.row])
         activityList.remove(at: indextPath.row)
         var paths = Array<IndexPath>()
         paths.append(indextPath)
@@ -86,7 +93,6 @@ class PostAlarmActivityViewController: UIViewController {
         self.collectionView.deleteItems(at: paths)
             
         }, completion: nil)
-        
     }
 
 
@@ -116,6 +122,7 @@ extension PostAlarmActivityViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return activityList.count
     }
     
@@ -129,7 +136,10 @@ extension PostAlarmActivityViewController: UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
                 let activityCell = cell as! PostAlarmActivityCell
                 activityCell.task = activityList[indexPath.row]
-
+        
+        let variable = Variable<PostAlarmActivityCell>(activityCell)
+        arrayOfVariables.append(variable)
+        
 
     }
     
