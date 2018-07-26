@@ -87,10 +87,7 @@ class ActivityDurationViewController: UIViewController {
         let interval = totalTimeNeededPreTravel.minutes.inSeconds
          smartAlarm.totalTimeForPreTravel = Int(interval.value)
         smartAlarm.alarmTime = smartAlarm.desiredArrivalTime - smartAlarm.totalTimeNeededToTravel.seconds
-//        print("Total time needed: \(smartAlarm.totalTimeNeededToTravel)")
-//        print("Alarm Time is \(smartAlarm.alarmTime)")
-//        print("Desired Arrival Time \(smartAlarm.desiredArrivalTime)")
-        
+
         performSegue(withIdentifier: "backToHome", sender: self)
     }
     

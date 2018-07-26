@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol ClassicAlarmCreatedDelegate {
-    func newAlarmCreated(createdAlarm: SystemAlarm)
-}
-
-protocol SmartAlarmCreatedDelegate {
-    
-    func newSmartCreated(newSmartAlarm: SmartAlarm)
-}
+//protocol ClassicAlarmCreatedDelegate {
+//    func newAlarmCreated(createdAlarm: BasicAlarm)
+//}
+//
+//protocol SmartAlarmCreatedDelegate {
+//
+//    func newSmartCreated(newSmartAlarm: SmartAlarm)
+//}

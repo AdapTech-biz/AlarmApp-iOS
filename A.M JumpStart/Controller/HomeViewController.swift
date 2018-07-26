@@ -37,7 +37,6 @@ class HomeViewController: UIViewController{
     var noteSoundEffect : AVAudioPlayer?
     var createdClassicAlarms : Results<BasicAlarm>!
     var createdSmartAlarms : Results<SmartAlarm>!
-//    var dataSource : RxTableViewSectionedReloadDataSource<AlarmsSectionModel>?
     var disposeBag = DisposeBag()
     /////////////////////////////////////////////////////////////////
 
@@ -45,46 +44,15 @@ class HomeViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.rowHeight = 70
         let nib = UINib(nibName: "AlarmCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "alarmCell")
 
-//        let dataSource = RxTableViewRealmDataSource<BasicAlarm>(cellIdentifier: "alarmCell", cellType: AlarmCell.self) { (cell, index, alarm) in
-//
-//            cell.alarmTitle.text = alarm.title
-//            cell.hourLabel.text = "\(alarm.alarmHour)"
-//            cell.minuteLabel.text = String(format: "%02d", alarm.alarmMin)
-//
-//            for day in alarm.weeklySchedule{
-//                switch day.dayToInt{
-//                case 1: cell.sundayLabel.textColor = UIColor.flatMint
-//                case 2: cell.mondayLabel.textColor = UIColor.flatMint
-//                case 3: cell.tuesdayLabel.textColor = UIColor.flatMint
-//                case 4: cell.wednesdayLabel.textColor = UIColor.flatMint
-//                case 5: cell.thursdayLabel.textColor = UIColor.flatMint
-//                case 6: cell.fridayLabel.textColor = UIColor.flatMint
-//                default: cell.saturdayLabel.textColor = UIColor.flatMint
-//                }
-//            }
-//
-//        }
-        
-        
-
-        
         loadAlarms()
-        let classicalarms = Observable.changeset(from: createdClassicAlarms)
 
-        // bind to table view
-        classicalarms
-            .bind(to: tableView.rx.realmChanges(createDataSource(data: BasicAlarm.self)))
-            .disposed(by: disposeBag)
-        
-        let smartAlarms = Observable.changeset(from: createdSmartAlarms)
-        smartAlarms
-            .bind(to: tableView.rx.realmChanges(createDataSource(data: SmartAlarm.self)))
-            .disposed(by: disposeBag)
-        
+
 
     }
     
@@ -93,39 +61,13 @@ class HomeViewController: UIViewController{
         case "goToOldFashion":
             let destinationVC = segue.destination as! OldFashionViewController
             destinationVC.homeViewController = self
-//            destinationVC.delegate = self
         case "goToSmartAlarm":
             let destinationVC = segue.destination as! SmartAlarmIntro
-//            destinationVC.smartAlarm.delegate = self
+            destinationVC.homeViewController = self
         default:
             print("Nothing to display")
         }
        
-    }
-    
-    func createDataSource<T>(data: T.Type)  -> RxTableViewRealmDataSource<T> where T: BasicAlarm{
-        
-        let dataSource = RxTableViewRealmDataSource<T>(cellIdentifier: "alarmCell", cellType: AlarmCell.self) { (cell, index, alarm) in
-            
-            cell.alarmTitle.text = alarm.title
-            cell.hourLabel.text = "\(alarm.alarmHour)"
-            cell.minuteLabel.text = String(format: "%02d", alarm.alarmMin)
-            cell.delegate = self
-            
-            for day in alarm.weeklySchedule{
-                switch day.dayToInt{
-                case 1: cell.sundayLabel.textColor = UIColor.flatMint
-                case 2: cell.mondayLabel.textColor = UIColor.flatMint
-                case 3: cell.tuesdayLabel.textColor = UIColor.flatMint
-                case 4: cell.wednesdayLabel.textColor = UIColor.flatMint
-                case 5: cell.thursdayLabel.textColor = UIColor.flatMint
-                case 6: cell.fridayLabel.textColor = UIColor.flatMint
-                default: cell.saturdayLabel.textColor = UIColor.flatMint
-                }
-            }
-            
-        }
-        return dataSource
     }
     
     @IBAction func unwindToHome(segue:UIStoryboardSegue) { }
@@ -179,7 +121,7 @@ class HomeViewController: UIViewController{
     }
     
     func updateModel(at indexPath: IndexPath){
-        //TODO: - Re-enable swipe to delete 
+        //TODO: - Re-enable swipe to delete
         var isSmart = false
         switch indexPath.section {
         case 0:
@@ -210,7 +152,7 @@ class HomeViewController: UIViewController{
 }
 
 
-extension HomeViewController: UNUserNotificationCenterDelegate, UITableViewDelegate{
+extension HomeViewController: UNUserNotificationCenterDelegate, UITableViewDelegate, UITableViewDataSource{
     
     
     //MARK: UserNotificationCenter Delegate Methods
@@ -251,6 +193,72 @@ extension HomeViewController: UNUserNotificationCenterDelegate, UITableViewDeleg
         
         completionHandler()
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+            return createdClassicAlarms.count
+        default:
+            return createdSmartAlarms.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = cell as! AlarmCell
+        
+        switch indexPath.section {
+        case 0:
+            let alarm = createdClassicAlarms[indexPath.row]
+            
+            cell.alarmTitle.text = alarm.title
+            cell.hourLabel.text = "\(alarm.alarmHour)"
+            cell.minuteLabel.text = String(format: "%02d", alarm.alarmMin)
+            cell.delegate = self
+            
+            for day in alarm.weeklySchedule{
+                switch day.dayToInt{
+                case 1: cell.sundayLabel.textColor = UIColor.flatMint
+                case 2: cell.mondayLabel.textColor = UIColor.flatMint
+                case 3: cell.tuesdayLabel.textColor = UIColor.flatMint
+                case 4: cell.wednesdayLabel.textColor = UIColor.flatMint
+                case 5: cell.thursdayLabel.textColor = UIColor.flatMint
+                case 6: cell.fridayLabel.textColor = UIColor.flatMint
+                default: cell.saturdayLabel.textColor = UIColor.flatMint
+                }
+            }
+        default:
+            let alarm = createdSmartAlarms[indexPath.row]
+            cell.alarmTitle.text = alarm.title
+            cell.hourLabel.text = "\(alarm.alarmHour)"
+            cell.minuteLabel.text = String(format: "%02d", alarm.alarmMin)
+            cell.delegate = self
+            
+            for day in alarm.weeklySchedule{
+                switch day.dayToInt{
+                case 1: cell.sundayLabel.textColor = UIColor.flatMint
+                case 2: cell.mondayLabel.textColor = UIColor.flatMint
+                case 3: cell.tuesdayLabel.textColor = UIColor.flatMint
+                case 4: cell.wednesdayLabel.textColor = UIColor.flatMint
+                case 5: cell.thursdayLabel.textColor = UIColor.flatMint
+                case 6: cell.fridayLabel.textColor = UIColor.flatMint
+                default: cell.saturdayLabel.textColor = UIColor.flatMint
+                }
+            }
+        }
+        
+    
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "alarmCell", for: indexPath) as! AlarmCell
+        
+        cell.accessoryType = .disclosureIndicator
+        return cell
+    }
+    
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 2
+//    }
     
     //////////////////////////////////////////////////////////////////
     

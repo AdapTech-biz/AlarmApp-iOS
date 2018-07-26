@@ -19,7 +19,7 @@ class BasicAlarm: Object {
      @objc dynamic var alarmHour : Int = 0
      @objc dynamic var alarmMin : Int = 0
      @objc dynamic var isRepeatable : Bool = false
-     @objc dynamic var isSmart : Bool = true
+     @objc dynamic var isSmart : Bool = false
      var weeklySchedule = List<DayofWeek>()
      @objc dynamic var alarmTime = Date(){
         willSet{

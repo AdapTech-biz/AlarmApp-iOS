@@ -26,6 +26,7 @@ class SmartAlarmIntro: UIViewController {
     }
     
     var smartAlarm: SmartAlarm = SmartAlarm(title: "Alarm")
+    var homeViewController : HomeViewController?
     
      let states = UIPickerView()
     
@@ -159,6 +160,8 @@ class SmartAlarmIntro: UIViewController {
         smartAlarm.destination.city = cityTextField.text!
         smartAlarm.destination.state = stateTextField.text!
         smartAlarm.desiredArrivalTime = desiredTimePicker.date
+        smartAlarm.systemAlarmComponent?.center.delegate = self.homeViewController
+        smartAlarm.isSmart = true
         
         print(smartAlarm.destination.address)
         
